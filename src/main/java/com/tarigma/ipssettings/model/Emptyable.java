@@ -8,7 +8,7 @@ public abstract class Emptyable {
     /**
      * Is empty
      */
-    private boolean isEmpty;
+    private final boolean isEmpty;
 
     /**
      * Construct emptyable
