@@ -1,11 +1,16 @@
 package com.tarigma.ipssettings;
 
+import com.tarigma.ipssettings.detector.InputTypeDetector;
+import com.tarigma.ipssettings.detector.InputTypeRelation;
 import com.tarigma.ipssettings.io.FileInputFinderService;
+import com.tarigma.ipssettings.util.FileUtil;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @Component
 public class IpsSettingsBootstrapper implements ApplicationListener<ContextRefreshedEvent> {
@@ -22,10 +27,20 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ContextRefre
         // get input service
         FileInputFinderService fileInputFinderService = event.getApplicationContext().getBean(FileInputFinderService.class);
 
-        // get input file
+        // do conversion
         try {
-            // TODO this is a test
-            System.out.println("fileInputFinderService.getIpsSettingsInput().getAbsolutePath() = " + fileInputFinderService.getIpsSettingsInput().getAbsolutePath());
+
+            // get input file
+            File input = fileInputFinderService.getIpsSettingsInput();
+
+            // get input data
+            List<String> inputData = FileUtil.readContents(input);
+
+            // detect type
+            InputTypeRelation inputTypeRelation = InputTypeDetector.findInputType(inputData);
+
+            System.out.println("inputTypeRelation = " + inputTypeRelation);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
