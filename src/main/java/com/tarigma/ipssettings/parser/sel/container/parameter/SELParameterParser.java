@@ -86,8 +86,6 @@ public class SELParameterParser implements ParameterParser<Parameter<ParameterDa
      * @return data type
      */
     private ParameterDataType determineValueDataType(String value) {
-        ParameterDataType parameterDataType = null;
-
         try {
             Double.parseDouble(value);
             return ParameterDataType.DOUBLE;
