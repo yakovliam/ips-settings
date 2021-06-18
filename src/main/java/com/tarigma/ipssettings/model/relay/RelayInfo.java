@@ -7,7 +7,7 @@ public class RelayInfo {
     /**
      * Represents `AssetID`
      */
-    private UUID assetId;
+    private String assetId;
 
     /**
      * Represents `LocationPath`
@@ -46,11 +46,11 @@ public class RelayInfo {
      */
     private UUID activeParamSetId;
 
-    public UUID getAssetId() {
+    public String getAssetId() {
         return assetId;
     }
 
-    public RelayInfo setAssetId(UUID assetId) {
+    public RelayInfo setAssetId(String assetId) {
         this.assetId = assetId;
         return this;
     }
