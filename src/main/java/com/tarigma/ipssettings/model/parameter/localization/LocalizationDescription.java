@@ -2,9 +2,8 @@ package com.tarigma.ipssettings.model.parameter.localization;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
-import com.tarigma.ipssettings.model.parameter.Unit;
 
-public class LocalizationUnit extends Unit {
+public class LocalizationDescription {
 
     /**
      * Represents attribute `Lang3`
@@ -19,12 +18,12 @@ public class LocalizationUnit extends Unit {
     private String value;
 
     /**
-     * Construct localization unit
+     * Construct localization description
      *
      * @param lang3 lang3
      * @param value value
      */
-    public LocalizationUnit(String lang3, String value) {
+    public LocalizationDescription(String lang3, String value) {
         this.lang3 = lang3;
         this.value = value;
     }
@@ -33,7 +32,7 @@ public class LocalizationUnit extends Unit {
         return lang3;
     }
 
-    public LocalizationUnit setLang3(String lang3) {
+    public LocalizationDescription setLang3(String lang3) {
         this.lang3 = lang3;
         return this;
     }
@@ -42,8 +41,9 @@ public class LocalizationUnit extends Unit {
         return value;
     }
 
-    public LocalizationUnit setValue(String value) {
+    public LocalizationDescription setValue(String value) {
         this.value = value;
         return this;
     }
 }
+

@@ -1,20 +1,25 @@
 package com.tarigma.ipssettings.model.parameter.range;
 
-public class Range {
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-    /**
-     * Represents `MaxValue`
-     */
-    private MaxValue maxValue;
+public class Range {
 
     /**
      * Represents `MinValue`
      */
+    @JacksonXmlProperty(localName = "MinValue")
     private MinValue minValue;
+
+    /**
+     * Represents `MaxValue`
+     */
+    @JacksonXmlProperty(localName = "MinValue")
+    private MaxValue maxValue;
 
     /**
      * Represents `Step`
      */
+    @JacksonXmlProperty(localName = "Step")
     private Step step;
 
     public MaxValue getMaxValue() {

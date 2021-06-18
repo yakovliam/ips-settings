@@ -2,6 +2,8 @@ package com.tarigma.ipssettings.parser.sel.container.parameter;
 
 import com.tarigma.ipssettings.model.parameter.Parameter;
 import com.tarigma.ipssettings.model.parameter.ParameterDataType;
+import com.tarigma.ipssettings.model.parameter.localization.Localization;
+import com.tarigma.ipssettings.model.parameter.localization.LocalizationUnit;
 import com.tarigma.ipssettings.parser.container.parameter.ParameterParser;
 
 import java.util.Arrays;
@@ -73,10 +75,15 @@ public class SELParameterParser implements ParameterParser<Parameter<ParameterDa
 
         Parameter<ParameterDataType> parameter = Parameter.with(parameterDataType);
 
+        Localization localization = new Localization()
+                .setEnuLang3Description(name)
+                .setEnuLang3Name(descriptionAndUnits);
+
         return parameter.setDataType(parameterDataType)
                 .setDescription(descriptionAndUnits)
                 .setName(name)
-                .setValue(valueAsString);
+                .setValue(valueAsString)
+                .setLocalization(localization);
     }
 
     /**

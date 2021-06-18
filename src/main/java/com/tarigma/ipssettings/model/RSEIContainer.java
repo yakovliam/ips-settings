@@ -1,85 +1,103 @@
 package com.tarigma.ipssettings.model;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.tarigma.ipssettings.model.parameter.ParameterSet;
 import com.tarigma.ipssettings.model.relay.RelayInfo;
 
 import java.util.UUID;
 
+@JacksonXmlRootElement(localName = "RSEI")
 public class RSEIContainer {
 
     /**
      * Represents `Comment`
      */
+    @JacksonXmlProperty(localName = "Comment")
     private String comment;
 
     /**
      * Represents `VersionRSEI`
      */
+    @JacksonXmlProperty(localName = "VersionRSEI")
     private String versionRSEI;
 
     /**
      * Represents `SoftwareSource`
      */
+    @JacksonXmlProperty(localName = "SoftwareSource")
     private String softwareSource;
 
     /**
      * Represents `MachineName`
      */
+    @JacksonXmlProperty(localName = "MachineName")
     private String machineName;
 
     /**
      * Represents `UserDomainName`
      */
+    @JacksonXmlProperty(localName = "UserDomainName")
     private String userDomainName;
 
     /**
      * Represents `UserName`
      */
+    @JacksonXmlProperty(localName = "UserName")
     private String userName;
 
     /**
      * Represents `DataSource`
      */
+    @JacksonXmlProperty(localName = "DataSource")
     private String dataSource;
 
     /**
      * Represents `Database`
      */
+    @JacksonXmlProperty(localName = "Database")
     private String database;
 
     /**
      * Represents `SqlServerVersion`
      */
+    @JacksonXmlProperty(localName = "SqlServerVersion")
     private String sqlServerVersion;
 
     /**
      * Represents `DateTimeFormat`
      */
+    @JacksonXmlProperty(localName = "DateTimeFormat")
     private String dateTimeFormat;
 
     /***
      * Represents `DateTime`
      */
+    @JacksonXmlProperty(localName = "DateTime")
     private String dateTime;
 
     /**
      * Represents `LanguageUI`
      */
+    @JacksonXmlProperty(localName = "LanguageUI")
     private String languageUI;
 
     /**
      * Represents `FileStamp`
      */
+    @JacksonXmlProperty(localName = "FileStamp")
     private UUID fileStamp;
 
     /**
      * Represents `RelayInfo`
      */
+    @JacksonXmlProperty(localName = "RelayInfo")
     private RelayInfo relayInfo;
 
     /**
      * Represents `ParameterSet`
      */
+    @JacksonXmlProperty(localName = "ParameterSet")
     private ParameterSet parameterSet;
 
     public String getComment() {

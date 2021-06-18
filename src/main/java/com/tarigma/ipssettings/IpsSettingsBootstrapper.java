@@ -3,11 +3,13 @@ package com.tarigma.ipssettings;
 import com.tarigma.ipssettings.detector.InputTypeDetector;
 import com.tarigma.ipssettings.detector.InputTypeRelation;
 import com.tarigma.ipssettings.io.FileInputFinderService;
+import com.tarigma.ipssettings.io.FileOutputWriterService;
 import com.tarigma.ipssettings.model.RSEIContainer;
 import com.tarigma.ipssettings.parser.RSEIParser;
 import com.tarigma.ipssettings.parser.sel.SELParser;
 import com.tarigma.ipssettings.parser.ge.GEParser;
 import com.tarigma.ipssettings.util.FileUtil;
+import com.tarigma.ipssettings.xml.RSEIContainerXMLWriter;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -49,10 +51,13 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ContextRefre
             // parse into container
             RSEIContainer container = parser.parse(inputData);
 
-            container.getParameterSet().getParameterSet().forEach(p -> {
-                System.out.println("{" + p.getName() + ": " + p.getValue() + ", " + p.getDescription() + " - " + p.getDataType().getHandle() + "}");
-            });
+            // convert container into XML
+            String xmlString = new RSEIContainerXMLWriter().write(container);
 
+            // get output service
+            FileOutputWriterService fileOutputWriterService = event.getApplicationContext().getBean(FileOutputWriterService.class);
+            // write to output
+            fileOutputWriterService.writeToOutputFile(xmlString);
 
         } catch (IOException e) {
             e.printStackTrace();

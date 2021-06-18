@@ -1,5 +1,7 @@
 package com.tarigma.ipssettings.model.relay;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 import java.util.UUID;
 
 public class RelayInfo {
@@ -7,31 +9,37 @@ public class RelayInfo {
     /**
      * Represents `AssetID`
      */
+    @JacksonXmlProperty(localName = "AssetID")
     private String assetId;
 
     /**
      * Represents `LocationPath`
      */
+    @JacksonXmlProperty(localName = "LocationPath")
     private String locationPath;
 
     /**
      * Represents `Manufacturer`
      */
+    @JacksonXmlProperty(localName = "Manufacturer")
     private String manufacturer;
 
     /**
      * Represents `RelayType`
      */
+    @JacksonXmlProperty(localName = "RelayType")
     private String relayType;
 
     /**
      * Represents `SerialNumber`
      */
+    @JacksonXmlProperty(localName = "SerialNumber")
     private String serialNumber;
 
     /**
      * Represents `FirmwareVersion`
      */
+    @JacksonXmlProperty(localName = "FirmwareVersion")
     private String firmwareVersion;
 
     /**
@@ -39,11 +47,13 @@ public class RelayInfo {
      *
      * Usually empty ({@code ""})
      */
+    @JacksonXmlProperty(localName = "HardwareVersion")
     private String hardwareVersion;
 
     /**
      * Represents `ActiveParamSetID`
      */
+    @JacksonXmlProperty(localName = "ActiveParamSetID")
     private UUID activeParamSetId;
 
     public String getAssetId() {

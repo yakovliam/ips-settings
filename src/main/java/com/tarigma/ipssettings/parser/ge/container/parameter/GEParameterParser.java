@@ -1,7 +1,10 @@
 package com.tarigma.ipssettings.parser.ge.container.parameter;
 
+import com.tarigma.ipssettings.model.RSEIContainer;
 import com.tarigma.ipssettings.model.parameter.Parameter;
 import com.tarigma.ipssettings.model.parameter.ParameterDataType;
+import com.tarigma.ipssettings.model.parameter.localization.Localization;
+import com.tarigma.ipssettings.model.parameter.localization.LocalizationUnit;
 import com.tarigma.ipssettings.parser.container.parameter.ParameterParser;
 
 import java.util.regex.Matcher;
@@ -32,10 +35,16 @@ public class GEParameterParser implements ParameterParser<Parameter<ParameterDat
 
         Parameter<ParameterDataType> parameter = Parameter.with(parameterDataType);
 
+        // build localization
+        Localization localization = new Localization()
+                .setEnuLang3Description(key)
+                .setEnuLang3Name(key);
+
         return parameter.setDataType(parameterDataType)
                 .setDescription(key)
                 .setName(key)
-                .setValue(valueAsString);
+                .setValue(valueAsString)
+                .setLocalization(localization);
     }
 
     /**
