@@ -6,7 +6,7 @@ import com.tarigma.ipssettings.parser.RSEIParser;
 import java.util.List;
 
 /**
- * Parses GE format input (colon separated) into the RSEI class structure
+ * Parses SEL format input (comma separated) into the RSEI class structure
  */
 public class GEParser implements RSEIParser {
 

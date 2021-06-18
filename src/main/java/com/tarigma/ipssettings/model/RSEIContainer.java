@@ -1,5 +1,8 @@
 package com.tarigma.ipssettings.model;
 
+import com.tarigma.ipssettings.model.parameter.ParameterSet;
+import com.tarigma.ipssettings.model.relay.RelayInfo;
+
 import java.util.UUID;
 
 public class RSEIContainer {
@@ -68,6 +71,16 @@ public class RSEIContainer {
      * Represents `FileStamp`
      */
     private UUID fileStamp;
+
+    /**
+     * Represents `RelayInfo`
+     */
+    private RelayInfo relayInfo;
+
+    /**
+     * Represents `ParameterSet`
+     */
+    private ParameterSet parameterSet;
 
     public String getComment() {
         return comment;
@@ -183,6 +196,24 @@ public class RSEIContainer {
 
     public RSEIContainer setFileStamp(UUID fileStamp) {
         this.fileStamp = fileStamp;
+        return this;
+    }
+
+    public RelayInfo getRelayInfo() {
+        return relayInfo;
+    }
+
+    public RSEIContainer setRelayInfo(RelayInfo relayInfo) {
+        this.relayInfo = relayInfo;
+        return this;
+    }
+
+    public ParameterSet getParameterSet() {
+        return parameterSet;
+    }
+
+    public RSEIContainer setParameterSet(ParameterSet parameterSet) {
+        this.parameterSet = parameterSet;
         return this;
     }
 }

@@ -3,6 +3,10 @@ package com.tarigma.ipssettings;
 import com.tarigma.ipssettings.detector.InputTypeDetector;
 import com.tarigma.ipssettings.detector.InputTypeRelation;
 import com.tarigma.ipssettings.io.FileInputFinderService;
+import com.tarigma.ipssettings.model.RSEIContainer;
+import com.tarigma.ipssettings.parser.RSEIParser;
+import com.tarigma.ipssettings.parser.sel.SELParser;
+import com.tarigma.ipssettings.parser.ge.GEParser;
 import com.tarigma.ipssettings.util.FileUtil;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -39,7 +43,16 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ContextRefre
             // detect type
             InputTypeRelation inputTypeRelation = InputTypeDetector.findInputType(inputData);
 
-            System.out.println("inputTypeRelation = " + inputTypeRelation);
+            // get corresponding parser
+            RSEIParser parser = inputTypeRelation == InputTypeRelation.GE ? new GEParser() : new SELParser();
+
+            // parse into container
+            RSEIContainer container = parser.parse(inputData);
+
+            container.getParameterSet().getParameterSet().forEach(p -> {
+                System.out.println("{" + p.getName() + ": " + p.getValue() + ", " + p.getDescription() + " - " + p.getDataType().getHandle() + "}");
+            });
+
 
         } catch (IOException e) {
             e.printStackTrace();

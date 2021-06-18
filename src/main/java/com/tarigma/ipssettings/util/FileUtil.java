@@ -2,6 +2,8 @@ package com.tarigma.ipssettings.util;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -32,15 +34,7 @@ public class FileUtil {
      * @param file file
      * @return lines
      */
-    public static List<String> readContents(File file) throws FileNotFoundException {
-        Scanner scanner = new Scanner(file);
-
-        List<String> lines = new ArrayList<String>();
-
-        while (scanner.hasNextLine()) {
-            lines.add(scanner.nextLine());
-        }
-
-        return lines;
+    public static List<String> readContents(File file) throws IOException {
+        return Files.readAllLines(file.toPath());
     }
 }

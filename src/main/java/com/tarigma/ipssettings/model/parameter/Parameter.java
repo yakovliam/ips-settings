@@ -11,7 +11,7 @@ import java.util.UUID;
  *
  * @param <T> datatype
  */
-public class Parameter<T extends ParameterDataType> {
+public class Parameter<T extends Enum<ParameterDataType>> {
 
     /**
      * Represents `BlockID`
@@ -40,8 +40,10 @@ public class Parameter<T extends ParameterDataType> {
 
     /**
      * Represents `Value`
+     * <p>
+     * Always a string, because that's how XML uses it
      */
-    private T value;
+    private String value;
 
     public UUID getBlockId() {
         return blockId;
@@ -88,12 +90,16 @@ public class Parameter<T extends ParameterDataType> {
         return this;
     }
 
-    public T getValue() {
+    public String getValue() {
         return value;
     }
 
-    public Parameter<T> setValue(T value) {
+    public Parameter<T> setValue(String value) {
         this.value = value;
         return this;
+    }
+
+    public static <E2 extends Enum<ParameterDataType>> Parameter<E2> with(E2 item) {
+        return new Parameter<E2>();
     }
 }
