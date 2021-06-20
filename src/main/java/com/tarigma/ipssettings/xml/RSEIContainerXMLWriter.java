@@ -1,6 +1,7 @@
 package com.tarigma.ipssettings.xml;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
@@ -21,7 +22,9 @@ public class RSEIContainerXMLWriter implements XMLWriter<RSEIContainer, String> 
         xmlModule.setDefaultUseWrapper(false);
         XmlMapper objectMapper = new XmlMapper(xmlModule);
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        objectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
         objectMapper.enable(ToXmlGenerator.Feature.WRITE_XML_DECLARATION);
+        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.UPPER_CAMEL_CASE);
 
         return objectMapper.writeValueAsString(rseiContainer);
     }
