@@ -28,4 +28,9 @@ public enum ParameterDataType {
     public String getHandle() {
         return handle;
     }
+
+    @Override
+    public String toString() {
+    	return getHandle();
+    }
 }
