@@ -1,26 +1,27 @@
 package com.tarigma.ipssettings;
 
-import com.tarigma.ipssettings.detector.InputTypeDetector;
-import com.tarigma.ipssettings.detector.InputTypeRelation;
-import com.tarigma.ipssettings.io.FileInputFinderService;
-import com.tarigma.ipssettings.io.FileOutputWriterService;
-import com.tarigma.ipssettings.model.RSEIContainer;
-import com.tarigma.ipssettings.parser.RSEIParser;
-import com.tarigma.ipssettings.parser.sel.SELParser;
-import com.tarigma.ipssettings.parser.ge.GEParser;
-import com.tarigma.ipssettings.util.FileUtil;
-import com.tarigma.ipssettings.xml.RSEIContainerXMLWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
+import com.tarigma.ipssettings.detector.InputTypeDetector;
+import com.tarigma.ipssettings.detector.InputTypeRelation;
+import com.tarigma.ipssettings.model.RSEIContainer;
+import com.tarigma.ipssettings.parser.RSEIParser;
+import com.tarigma.ipssettings.parser.ge.GEParser;
+import com.tarigma.ipssettings.parser.sel.SELParser;
+import com.tarigma.ipssettings.xml.RSEIContainerXMLWriter;
 
 @Component
 public class IpsSettingsBootstrapper implements ApplicationListener<ContextRefreshedEvent> {
 
+	private static final Logger LOG = LoggerFactory.getLogger(IpsSettingsBootstrapper.class);
 
     /**
      * Bootstrapper / entry point for the program
@@ -30,17 +31,21 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ContextRefre
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
-        // get input service
-        FileInputFinderService fileInputFinderService = event.getApplicationContext().getBean(FileInputFinderService.class);
-
-        // do conversion
+        // attempt conversion for each file in input directory
         try {
-
-            // get input file
-            File input = fileInputFinderService.getIpsSettingsInput();
-
-            // get input data
-            List<String> inputData = FileUtil.readContents(input);
+        	Path inputDirectory = Path.of(System.getProperty("user.dir"), "assets", "input");
+        	Files.walk(inputDirectory)
+        		.filter(Files::isRegularFile)
+        		.forEach(this::convert);
+            
+        } catch (Exception e) {
+            LOG.error("failed to walk input directory", e);
+        }
+    }
+    
+    private void convert(Path input) {
+    	try {
+            List<String> inputData = Files.readAllLines(input);
 
             // detect type
             InputTypeRelation inputTypeRelation = InputTypeDetector.findInputType(inputData);
@@ -52,15 +57,14 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ContextRefre
             RSEIContainer container = parser.parse(inputData);
 
             // convert container into XML
-            String xmlString = new RSEIContainerXMLWriter().write(container);
+            String xmlContent = new RSEIContainerXMLWriter().write(container);
 
-            // get output service
-            FileOutputWriterService fileOutputWriterService = event.getApplicationContext().getBean(FileOutputWriterService.class);
             // write to output
-            fileOutputWriterService.writeToOutputFile(xmlString);
-
-        } catch (IOException e) {
-            e.printStackTrace();
+            String outputFileName = input.getFileName().toString().concat(".output.xml");
+            Path outputDir = input.getParent().resolveSibling("output");
+            Files.writeString(outputDir.resolve(outputFileName), xmlContent);
+        } catch (Exception e) {
+            LOG.error("failed to convert: {}", input, e);
         }
     }
 }
