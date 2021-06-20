@@ -70,9 +70,9 @@ public class Parameter<T extends Enum<ParameterDataType>> {
     /**
      * Represents `Localization`
      */
-    @JacksonXmlProperty(localName = "Localization")
-    @JacksonXmlElementWrapper(useWrapping = false)
-    private Localization localization;
+//    @JacksonXmlProperty(localName = "Localization")
+//    @JacksonXmlElementWrapper(useWrapping = false)
+//    private Localization localization;
 
     public UUID getBlockId() {
         return blockId;
@@ -128,14 +128,14 @@ public class Parameter<T extends Enum<ParameterDataType>> {
         return this;
     }
 
-    public Localization getLocalization() {
-        return localization;
-    }
+//    public Localization getLocalization() {
+//        return localization;
+//    }
 
-    public Parameter<T> setLocalization(Localization localization) {
-        this.localization = localization;
-        return this;
-    }
+//    public Parameter<T> setLocalization(Localization localization) {
+//        this.localization = localization;
+//        return this;
+//    }
 
     public Unit getUnit() {
         return unit;

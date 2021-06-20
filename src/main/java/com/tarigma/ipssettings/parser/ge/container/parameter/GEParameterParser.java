@@ -43,8 +43,8 @@ public class GEParameterParser implements ParameterParser<Parameter<ParameterDat
         return parameter.setDataType(parameterDataType)
                 .setDescription(key)
                 .setName(key)
-                .setValue(valueAsString)
-                .setLocalization(localization);
+//                .setLocalization(localization)
+                .setValue(valueAsString);
     }
 
     /**

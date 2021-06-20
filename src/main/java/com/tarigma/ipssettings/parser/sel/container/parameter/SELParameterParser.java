@@ -82,8 +82,8 @@ public class SELParameterParser implements ParameterParser<Parameter<ParameterDa
         return parameter.setDataType(parameterDataType)
                 .setDescription(descriptionAndUnits)
                 .setName(name)
-                .setValue(valueAsString)
-                .setLocalization(localization);
+//                .setLocalization(localization)
+                .setValue(valueAsString);
     }
 
     /**
