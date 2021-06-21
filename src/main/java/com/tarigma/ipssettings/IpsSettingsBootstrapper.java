@@ -21,7 +21,7 @@ import com.tarigma.ipssettings.xml.RSEIContainerXMLWriter;
 @Component
 public class IpsSettingsBootstrapper implements ApplicationListener<ContextRefreshedEvent> {
 
-	private static final Logger LOG = LoggerFactory.getLogger(IpsSettingsBootstrapper.class);
+    private static final Logger LOG = LoggerFactory.getLogger(IpsSettingsBootstrapper.class);
 
     /**
      * Bootstrapper / entry point for the program
@@ -33,10 +33,10 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ContextRefre
 
         // attempt conversion for each file in input directory
         try {
-        	Path inputDirectory = Path.of(System.getProperty("user.dir"), "assets", "input");
-        	Files.walk(inputDirectory)
-        		.filter(Files::isRegularFile)
-        		.forEach(this::convert);
+            Path inputDirectory = Path.of(System.getProperty("user.dir"), "assets", "input");
+            Files.walk(inputDirectory)
+                .filter(Files::isRegularFile)
+                .forEach(this::convert);
             
         } catch (Exception e) {
             LOG.error("failed to walk input directory", e);
@@ -44,7 +44,7 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ContextRefre
     }
     
     private void convert(Path input) {
-    	try {
+        try {
             List<String> inputData = Files.readAllLines(input);
 
             // detect type

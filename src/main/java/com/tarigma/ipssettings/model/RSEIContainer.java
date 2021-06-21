@@ -13,7 +13,7 @@ import com.tarigma.ipssettings.model.relay.RelayInfo;
 @JacksonXmlRootElement(localName = "RSEI")
 public class RSEIContainer {
 
-	private static final String DATE_TIME_FORMAT = "dd.MM.yyyy HH:mm:ss";
+    private static final String DATE_TIME_FORMAT = "dd.MM.yyyy HH:mm:ss";
 
     /**
      * Represents `Comment`
@@ -244,19 +244,19 @@ public class RSEIContainer {
         return this;
     }
 
-	public List<Block> getBlocks() {
-		return blocks;
-	}
+    public List<Block> getBlocks() {
+        return blocks;
+    }
 
-	public void setBlocks(List<Block> blocks) {
-		this.blocks = blocks;
-	}
+    public void setBlocks(List<Block> blocks) {
+        this.blocks = blocks;
+    }
 
-	public Object getEnums() {
-		return enums;
-	}
+    public Object getEnums() {
+        return enums;
+    }
 
-	public void setEnums(Object enums) {
-		this.enums = enums;
-	}
+    public void setEnums(Object enums) {
+        this.enums = enums;
+    }
 }
