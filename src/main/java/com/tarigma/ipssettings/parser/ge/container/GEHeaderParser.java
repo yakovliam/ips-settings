@@ -29,6 +29,8 @@ public class GEHeaderParser implements HeaderParser {
                 relayInfo.setHardwareVersion(value);
             } else if (key.equalsIgnoreCase("Order Code")) {
                 relayInfo.setRelayType(value);
+            } else if (key.equalsIgnoreCase("Product Version")) {
+                relayInfo.setFirmwareVersion(value);
             } // fall through
         }
 
