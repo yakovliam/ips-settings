@@ -156,6 +156,6 @@ public class Parameter<T extends Enum<ParameterDataType>> {
     }
 
     public static <E2 extends Enum<ParameterDataType>> Parameter<E2> with(E2 item) {
-        return new Parameter<E2>();
+        return new Parameter<>();
     }
 }

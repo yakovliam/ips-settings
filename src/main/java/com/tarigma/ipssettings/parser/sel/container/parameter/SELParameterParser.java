@@ -91,8 +91,19 @@ public class SELParameterParser implements ParameterParser<Parameter<ParameterDa
         }
 
         // detect value type
-        ParameterDataType parameterDataType = dataTypeAsString == null ?
-                determineValueDataType(valueAsString) : determineValueDataTypeByGiven(dataTypeAsString);
+        ParameterDataType parameterDataType;
+        if (dataTypeAsString != null && !dataTypeAsString.isEmpty()) {
+            parameterDataType = determineValueDataTypeByGiven(dataTypeAsString);
+
+            if (parameterDataType == null) {
+                // fall back to string, since we can't figure out what it is and if it was given
+                // and it's not defined as an F for float, then it must be some type of enum,
+                // and we want to parse that as a string
+                parameterDataType = ParameterDataType.STRING;
+            }
+        } else {
+            parameterDataType = determineValueDataType(valueAsString);
+        }
 
         // initialize parameter
         Parameter<ParameterDataType> parameter = Parameter.with(parameterDataType);
@@ -112,6 +123,11 @@ public class SELParameterParser implements ParameterParser<Parameter<ParameterDa
         // Localization localization = new Localization()
         //         .setEnuLang3Description(name)
         //         .setEnuLang3Name(descriptionAndUnits);
+
+        if (descriptionAndUnits.startsWith("Main Board Type")) {
+            System.out.println("dataTypeAsString = " + dataTypeAsString);
+            System.out.println("determineValueDataTypeByGiven(dataTypeAsString) = " + determineValueDataTypeByGiven(dataTypeAsString));
+        }
 
         parameter.setDataType(parameterDataType)
                 .setDescription(descriptionAndUnits)
