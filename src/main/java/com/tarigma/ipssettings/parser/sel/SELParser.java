@@ -29,9 +29,9 @@ public class SELParser implements RSEIParser {
     private static final Pattern INFO_BLOCK_HEADER = Pattern.compile("\\[INFO\\]");
 
     /**
-     * P1 block header
+     * P1 or CM block header
      */
-    private static final Pattern P1_BLOCK_HEADER = Pattern.compile("\\[P1\\]");
+    private static final Pattern P1_OR_CM_BLOCK_HEADER = Pattern.compile("\\[(P1|CM)\\]");
 
     @Override
     public RSEIContainer parse(List<String> strings) {
@@ -64,7 +64,7 @@ public class SELParser implements RSEIParser {
             }
 
             // keep iterating until p1 block header
-            if (current.matches(P1_BLOCK_HEADER.pattern())) {
+            if (current.matches(P1_OR_CM_BLOCK_HEADER.pattern())) {
                 // this means everything after the current block is parsable data. so let's use the current index to
                 // grab that from the string list and parse it
                 break;
