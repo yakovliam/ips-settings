@@ -1,11 +1,12 @@
 package com.tarigma.ipssettings.model;
 
+import java.util.List;
+import java.util.UUID;
+
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.tarigma.ipssettings.model.parameter.ParameterSet;
 import com.tarigma.ipssettings.model.relay.RelayInfo;
-
-import java.util.UUID;
 
 @JacksonXmlRootElement(localName = "RSEI")
 public class RSEIContainer {
@@ -99,6 +100,10 @@ public class RSEIContainer {
      */
     @JacksonXmlProperty(localName = "ParameterSet")
     private ParameterSet parameterSet;
+    
+    private List<Block> blocks;
+    
+    private Object enums;
 
     public String getComment() {
         return comment;
@@ -234,4 +239,20 @@ public class RSEIContainer {
         this.parameterSet = parameterSet;
         return this;
     }
+
+	public List<Block> getBlocks() {
+		return blocks;
+	}
+
+	public void setBlocks(List<Block> blocks) {
+		this.blocks = blocks;
+	}
+
+	public Object getEnums() {
+		return enums;
+	}
+
+	public void setEnums(Object enums) {
+		this.enums = enums;
+	}
 }
