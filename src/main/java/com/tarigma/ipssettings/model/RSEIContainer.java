@@ -1,5 +1,7 @@
 package com.tarigma.ipssettings.model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 
@@ -10,6 +12,8 @@ import com.tarigma.ipssettings.model.relay.RelayInfo;
 
 @JacksonXmlRootElement(localName = "RSEI")
 public class RSEIContainer {
+
+	private static final String DATE_TIME_FORMAT = "dd.MM.yyyy HH:mm:ss";
 
     /**
      * Represents `Comment`
@@ -69,13 +73,13 @@ public class RSEIContainer {
      * Represents `DateTimeFormat`
      */
     @JacksonXmlProperty(localName = "DateTimeFormat")
-    private String dateTimeFormat;
+    private String dateTimeFormat = DATE_TIME_FORMAT;
 
     /***
      * Represents `DateTime`
      */
     @JacksonXmlProperty(localName = "DateTime")
-    private String dateTime;
+    private String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
 
     /**
      * Represents `LanguageUI`
@@ -190,19 +194,19 @@ public class RSEIContainer {
         return dateTimeFormat;
     }
 
-    public RSEIContainer setDateTimeFormat(String dateTimeFormat) {
-        this.dateTimeFormat = dateTimeFormat;
-        return this;
-    }
+//    public RSEIContainer setDateTimeFormat(String dateTimeFormat) {
+//        this.dateTimeFormat = dateTimeFormat;
+//        return this;
+//    }
 
     public String getDateTime() {
         return dateTime;
     }
 
-    public RSEIContainer setDateTime(String dateTime) {
-        this.dateTime = dateTime;
-        return this;
-    }
+//    public RSEIContainer setDateTime(String dateTime) {
+//        this.dateTime = dateTime;
+//        return this;
+//    }
 
     public String getLanguageUI() {
         return languageUI;
