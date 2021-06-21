@@ -1,9 +1,9 @@
 package com.tarigma.ipssettings.model.parameter;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,6 +27,7 @@ public class ParameterSet {
      * Each parameter begins and ends with {@code <Parameter></Parameter>}
      */
     @JacksonXmlProperty(localName = "Parameter")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private List<Parameter<?>> parameterSet;
 
     /**

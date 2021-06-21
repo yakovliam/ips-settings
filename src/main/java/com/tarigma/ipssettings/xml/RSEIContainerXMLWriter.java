@@ -3,7 +3,6 @@ package com.tarigma.ipssettings.xml;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.tarigma.ipssettings.model.RSEIContainer;
@@ -18,9 +17,7 @@ public class RSEIContainerXMLWriter implements XMLWriter<RSEIContainer, String> 
      */
     @Override
     public String write(RSEIContainer rseiContainer) throws JsonProcessingException {
-        JacksonXmlModule xmlModule = new JacksonXmlModule();
-        xmlModule.setDefaultUseWrapper(false);
-        XmlMapper objectMapper = new XmlMapper(xmlModule);
+        XmlMapper objectMapper = new XmlMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
         objectMapper.enable(ToXmlGenerator.Feature.WRITE_XML_DECLARATION);
