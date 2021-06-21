@@ -20,4 +20,8 @@ public class Unit {
     public Unit(String value) {
         this.value = value;
     }
+
+    public String getValue() {
+		return value;
+	}
 }
