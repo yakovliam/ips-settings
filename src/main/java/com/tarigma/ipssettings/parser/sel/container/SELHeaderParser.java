@@ -30,9 +30,9 @@ public class SELHeaderParser implements HeaderParser {
             if (key.equalsIgnoreCase("RELAYTYPE")) {
                 relayInfo.setRelayType(value);
             } else if (key.equalsIgnoreCase("FID")) {
-                relayInfo.setAssetId(value);
+                relayInfo.setFirmwareVersion(value);
             } else if (key.equalsIgnoreCase("BFID")) {
-                relayInfo.setManufacturer(value);
+                relayInfo.setHardwareVersion(value);
             } else if (key.equalsIgnoreCase("PARTNO")) {
                 relayInfo.setSerialNumber(value);
             } // fall through

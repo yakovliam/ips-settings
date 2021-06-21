@@ -24,9 +24,9 @@ public class GEHeaderParser implements HeaderParser {
             if (key.equalsIgnoreCase("Serial Number")) {
                 relayInfo.setSerialNumber(value);
             } else if (key.equalsIgnoreCase("Manufacturing Date")) {
-                rseiContainer.setDateTime(value);
+                relayInfo.setHardwareVersion(value);
             } else if (key.equalsIgnoreCase("Order Code")) {
-                rseiContainer.setComment("Order Code: " + value);
+                relayInfo.setRelayType(value);
             } // fall through
         }
 
