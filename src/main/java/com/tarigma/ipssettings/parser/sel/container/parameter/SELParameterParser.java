@@ -57,9 +57,8 @@ public class SELParameterParser implements ParameterParser<Parameter<ParameterDa
 
         int index = 0;
         while (matcher.find()) {
-            String c = matcher.group()
-            		.substring(1) // skip leading comma
-            		.replace("\"", ""); // replace any quotes
+            String c = matcher.group(1) // omit leading comma
+                    .replace("\"", ""); // replace any quotes
 
             if (index == 0) {
                 valueAsString = c;
