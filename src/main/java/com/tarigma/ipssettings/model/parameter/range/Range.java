@@ -8,43 +8,43 @@ public class Range {
      * Represents `MinValue`
      */
     @JacksonXmlProperty(localName = "MinValue")
-    private MinValue minValue;
+    private String minValue;
 
     /**
      * Represents `MaxValue`
      */
     @JacksonXmlProperty(localName = "MaxValue")
-    private MaxValue maxValue;
+    private String maxValue;
 
     /**
      * Represents `Step`
      */
     @JacksonXmlProperty(localName = "Step")
-    private Step step;
+    private String step;
 
-    public MaxValue getMaxValue() {
+    public String getMaxValue() {
         return maxValue;
     }
 
-    public Range setMaxValue(MaxValue maxValue) {
+    public Range setMaxValue(String maxValue) {
         this.maxValue = maxValue;
         return this;
     }
 
-    public MinValue getMinValue() {
+    public String getMinValue() {
         return minValue;
     }
 
-    public Range setMinValue(MinValue minValue) {
+    public Range setMinValue(String minValue) {
         this.minValue = minValue;
         return this;
     }
 
-    public Step getStep() {
+    public String getStep() {
         return step;
     }
 
-    public Range setStep(Step step) {
+    public Range setStep(String step) {
         this.step = step;
         return this;
     }
