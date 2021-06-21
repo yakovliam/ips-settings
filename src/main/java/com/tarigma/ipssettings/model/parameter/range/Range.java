@@ -22,6 +22,10 @@ public class Range {
     @JacksonXmlProperty(localName = "Step")
     private Step step;
 
+    public MaxValue getMaxValue() {
+        return maxValue;
+    }
+
     public Range setMaxValue(MaxValue maxValue) {
         this.maxValue = maxValue;
         return this;
