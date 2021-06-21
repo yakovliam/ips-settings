@@ -15,6 +15,8 @@ public class SELHeaderParser implements HeaderParser {
         RSEIContainer rseiContainer = new RSEIContainer();
         RelayInfo relayInfo = new RelayInfo();
 
+        relayInfo.setManufacturer("SEL");
+
         // TODO implement configuration default values
 
         Iterator<String> iterator = strings.iterator();

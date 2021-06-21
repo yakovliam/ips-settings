@@ -13,6 +13,8 @@ public class GEHeaderParser implements HeaderParser {
         RSEIContainer rseiContainer = new RSEIContainer();
         RelayInfo relayInfo = new RelayInfo();
 
+        relayInfo.setManufacturer("GE");
+
         // TODO implement configuration default values
 
         for (String line : strings) {
