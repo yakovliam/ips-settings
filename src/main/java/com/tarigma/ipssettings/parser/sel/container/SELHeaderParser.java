@@ -23,7 +23,7 @@ public class SELHeaderParser implements HeaderParser {
 
             // split by key val (=) and parse
 
-            String[] data = current.split("=");
+            String[] data = current.split("=", 2);
             String key = data[0];
             String value = data[1];
 

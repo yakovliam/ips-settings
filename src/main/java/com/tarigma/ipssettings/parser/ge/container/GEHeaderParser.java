@@ -17,7 +17,7 @@ public class GEHeaderParser implements HeaderParser {
 
         for (String line : strings) {
             // split by key val (:) and parse
-            String[] data = line.split(":");
+            String[] data = line.split(":", 2);
             String key = data[0];
             String value = data[1].trim();
 
