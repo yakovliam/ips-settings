@@ -1,13 +1,23 @@
 package com.tarigma.ipssettings.model.parameter.range;
 
-import com.tarigma.ipssettings.model.Emptyable;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 
-public class MaxValue extends Emptyable {
+public class MaxValue {
+
 
     /**
-     * Construct maxValue
+     * Value
+     * <p>
+     * Always exists as a string because that's how XML outputs it
      */
-    public MaxValue() {
-        super(true);
+    @JacksonXmlText
+    private final String value;
+
+    /**
+     * Constructs max value
+     * @param value value
+     */
+    public MaxValue(String value) {
+        this.value = value;
     }
 }

@@ -2,13 +2,17 @@ package com.tarigma.ipssettings.parser.sel.container.parameter;
 
 import com.tarigma.ipssettings.model.parameter.Parameter;
 import com.tarigma.ipssettings.model.parameter.ParameterDataType;
+import com.tarigma.ipssettings.model.parameter.Unit;
 import com.tarigma.ipssettings.model.parameter.localization.Localization;
 import com.tarigma.ipssettings.model.parameter.localization.LocalizationUnit;
+import com.tarigma.ipssettings.model.parameter.range.Range;
 import com.tarigma.ipssettings.parser.container.parameter.ParameterParser;
+import com.tarigma.ipssettings.parser.sel.container.parameter.range.SELRangeParser;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class SELParameterParser implements ParameterParser<Parameter<ParameterDataType>> {
 
@@ -30,10 +34,10 @@ public class SELParameterParser implements ParameterParser<Parameter<ParameterDa
 
     /**
      * Extracts the split group of the data (csv-like format)
-     * 
+     * <p>
      * Define a field as either double-quote-wrapped, or not containing a comma. Include leading comma.
      */
-    private static final Pattern SPLIT_GROUP_PATTERN = Pattern.compile(",(\"[^\"]+?\"|[^,]+?)");
+    private static final Pattern SPLIT_GROUP_PATTERN = Pattern.compile(",(\"[^\"]*?\"|[^,]*)");
 
     @Override
     public Parameter<ParameterDataType> parse(String s) {
@@ -51,6 +55,9 @@ public class SELParameterParser implements ParameterParser<Parameter<ParameterDa
         // define
         String valueAsString = null;
         String descriptionAndUnits = null;
+        String rangeAsString = null;
+        String dataTypeAsString = null;
+        String unitsAsString = null;
 
         // matcher
         Matcher matcher = SPLIT_GROUP_PATTERN.matcher(rest);
@@ -60,11 +67,23 @@ public class SELParameterParser implements ParameterParser<Parameter<ParameterDa
             String c = matcher.group(1) // omit leading comma
                     .replace("\"", ""); // replace any quotes
 
-            if (index == 0) {
-                valueAsString = c;
-            } else if (index == 4) {
-                descriptionAndUnits = c;
-            }// fall through
+            switch (index) {
+                case 0:
+                    valueAsString = c;
+                    break;
+                case 1:
+                    rangeAsString = c;
+                    break;
+                case 2:
+                    dataTypeAsString = c;
+                    break;
+                case 3:
+                    unitsAsString = c;
+                    break;
+                case 4:
+                    descriptionAndUnits = c;
+                    break;
+            }
 
             index++;
         }
@@ -74,19 +93,36 @@ public class SELParameterParser implements ParameterParser<Parameter<ParameterDa
         }
 
         // detect value type
-        ParameterDataType parameterDataType = determineValueDataType(valueAsString);
+        ParameterDataType parameterDataType = dataTypeAsString == null ?
+                determineValueDataType(valueAsString) : determineValueDatTypeByGiven(dataTypeAsString);
 
+        // initialize parameter
         Parameter<ParameterDataType> parameter = Parameter.with(parameterDataType);
 
-        Localization localization = new Localization()
-                .setEnuLang3Description(name)
-                .setEnuLang3Name(descriptionAndUnits);
+        // create range
+        Range range = (rangeAsString != null && !rangeAsString.isEmpty() && rangeAsString.contains("~"))
+                ? new SELRangeParser().parse(rangeAsString) : null;
 
-        return parameter.setDataType(parameterDataType)
+        // create unit
+        Unit unit = unitsAsString != null && !unitsAsString.isEmpty() ? new Unit(unitsAsString) : null;
+
+        // if not null, set it
+        if (unit != null) {
+            parameter.setUnit(unit);
+        }
+
+        // Localization localization = new Localization()
+        //         .setEnuLang3Description(name)
+        //         .setEnuLang3Name(descriptionAndUnits);
+
+        parameter.setDataType(parameterDataType)
                 .setDescription(descriptionAndUnits)
                 .setName(name)
 //                .setLocalization(localization)
-                .setValue(valueAsString);
+                .setValue(valueAsString)
+                .setRange(range);
+
+        return parameter;
     }
 
     /**
@@ -109,5 +145,24 @@ public class SELParameterParser implements ParameterParser<Parameter<ParameterDa
         }
 
         return ParameterDataType.STRING;
+    }
+
+    /**
+     * Determines the parameter data type of the given value based on the given data type string
+     * <p>
+     * For example, given "F" we return the type of 'Double' (because F means float, and double is the currently
+     * supported RSEI format with a similar type)
+     *
+     * @param givenDatatypeString givenDatatypeString
+     * @return data type
+     */
+    private ParameterDataType determineValueDatTypeByGiven(String givenDatatypeString) {
+        return Arrays.stream(ParameterDataType.values())
+                .filter(dataType -> Arrays.stream(dataType.getHandle())
+                        .anyMatch(d -> d.equalsIgnoreCase(givenDatatypeString)))
+                .collect(Collectors.toList())
+                .stream()
+                .findFirst()
+                .orElse(null);
     }
 }

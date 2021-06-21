@@ -25,6 +25,7 @@ public class LocalizationUnit extends Unit {
      * @param value value
      */
     public LocalizationUnit(String lang3, String value) {
+        super(value);
         this.lang3 = lang3;
         this.value = value;
     }

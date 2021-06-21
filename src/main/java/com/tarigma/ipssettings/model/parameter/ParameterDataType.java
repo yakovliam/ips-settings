@@ -2,21 +2,21 @@ package com.tarigma.ipssettings.model.parameter;
 
 public enum ParameterDataType {
 
-    DOUBLE("Double"),
-    STRING("String"),
+    DOUBLE("Double", "D", "Float", "F"),
+    STRING("String", "S"),
     ENUM("Enum");
 
     /**
      * The handle or human readable name
      */
-    private final String handle;
+    private final String[] handle;
 
     /**
      * Construct data type
      *
      * @param handle handle
      */
-    ParameterDataType(String handle) {
+    ParameterDataType(String... handle) {
         this.handle = handle;
     }
 
@@ -25,12 +25,12 @@ public enum ParameterDataType {
      *
      * @return handle
      */
-    public String getHandle() {
+    public String[] getHandle() {
         return handle;
     }
 
     @Override
     public String toString() {
-    	return getHandle();
+        return getHandle()[0];
     }
 }
