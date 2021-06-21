@@ -124,11 +124,6 @@ public class SELParameterParser implements ParameterParser<Parameter<ParameterDa
         //         .setEnuLang3Description(name)
         //         .setEnuLang3Name(descriptionAndUnits);
 
-        if (descriptionAndUnits.startsWith("Main Board Type")) {
-            System.out.println("dataTypeAsString = " + dataTypeAsString);
-            System.out.println("determineValueDataTypeByGiven(dataTypeAsString) = " + determineValueDataTypeByGiven(dataTypeAsString));
-        }
-
         parameter.setDataType(parameterDataType)
                 .setDescription(descriptionAndUnits)
                 .setName(name)
