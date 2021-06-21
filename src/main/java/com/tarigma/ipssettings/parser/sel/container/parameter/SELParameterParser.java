@@ -3,8 +3,6 @@ package com.tarigma.ipssettings.parser.sel.container.parameter;
 import com.tarigma.ipssettings.model.parameter.Parameter;
 import com.tarigma.ipssettings.model.parameter.ParameterDataType;
 import com.tarigma.ipssettings.model.parameter.Unit;
-import com.tarigma.ipssettings.model.parameter.localization.Localization;
-import com.tarigma.ipssettings.model.parameter.localization.LocalizationUnit;
 import com.tarigma.ipssettings.model.parameter.range.Range;
 import com.tarigma.ipssettings.parser.container.parameter.ParameterParser;
 import com.tarigma.ipssettings.parser.sel.container.parameter.range.SELRangeParser;
@@ -94,7 +92,7 @@ public class SELParameterParser implements ParameterParser<Parameter<ParameterDa
 
         // detect value type
         ParameterDataType parameterDataType = dataTypeAsString == null ?
-                determineValueDataType(valueAsString) : determineValueDatTypeByGiven(dataTypeAsString);
+                determineValueDataType(valueAsString) : determineValueDataTypeByGiven(dataTypeAsString);
 
         // initialize parameter
         Parameter<ParameterDataType> parameter = Parameter.with(parameterDataType);
@@ -156,7 +154,7 @@ public class SELParameterParser implements ParameterParser<Parameter<ParameterDa
      * @param givenDatatypeString givenDatatypeString
      * @return data type
      */
-    private ParameterDataType determineValueDatTypeByGiven(String givenDatatypeString) {
+    private ParameterDataType determineValueDataTypeByGiven(String givenDatatypeString) {
         return Arrays.stream(ParameterDataType.values())
                 .filter(dataType -> Arrays.stream(dataType.getHandle())
                         .anyMatch(d -> d.equalsIgnoreCase(givenDatatypeString)))
