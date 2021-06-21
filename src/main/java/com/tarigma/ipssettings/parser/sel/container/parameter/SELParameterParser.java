@@ -24,27 +24,29 @@ public class SELParameterParser implements ParameterParser<Parameter<ParameterDa
      * <p>
      * Example: SER1,"IN101,50P1,51P1,51N1,51P2,59S1,TRIP,TRGTR,LOP","","","","24 elements max.(enter NA to null)",""
      * turns into
-     * SER1,
+     * SER1
      */
-    private static final Pattern NAME_COMMA_PATTERN = Pattern.compile("^(.+?),");
+    private static final Pattern NAME_PATTERN = Pattern.compile("^[^,]+");
 
     /**
      * Extracts the split group of the data (csv-like format)
+     * 
+     * Define a field as either double-quote-wrapped, or not containing a comma. Include leading comma.
      */
-    private static final Pattern SPLIT_GROUP_PATTERN = Pattern.compile("([\"])(?:(?=(\\\\?))\\2.)*?\\1");
+    private static final Pattern SPLIT_GROUP_PATTERN = Pattern.compile(",(\"[^\"]+?\"|[^,]+?)");
 
     @Override
     public Parameter<ParameterDataType> parse(String s) {
         // split into comma separated values
-        Matcher nameMatcher = NAME_COMMA_PATTERN.matcher(s);
+        Matcher nameMatcher = NAME_PATTERN.matcher(s);
         if (!nameMatcher.find()) {
             return null;
         }
 
         // name
-        String name = nameMatcher.group().replace(",", "");
+        String name = nameMatcher.group().replace("\"", "");
 
-        String rest = s.replaceAll(NAME_COMMA_PATTERN.pattern(), "");
+        String rest = s.substring(nameMatcher.end());
 
         // define
         String valueAsString = null;
@@ -55,12 +57,14 @@ public class SELParameterParser implements ParameterParser<Parameter<ParameterDa
 
         int index = 0;
         while (matcher.find()) {
-            String c = matcher.group();
+            String c = matcher.group()
+            		.substring(1) // skip leading comma
+            		.replace("\"", ""); // replace any quotes
 
             if (index == 0) {
-                valueAsString = c.replace("\"", "");
+                valueAsString = c;
             } else if (index == 4) {
-                descriptionAndUnits = c.replace("\"", "");
+                descriptionAndUnits = c;
             }// fall through
 
             index++;
