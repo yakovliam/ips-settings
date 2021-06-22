@@ -40,6 +40,6 @@ jobs:
       with:
         name: output
         path: |
-          assets/input/*.set
-          output/*.xml
+          assets/*/*.set
+          */*.set.output.xml
         if-no-files-found: error
