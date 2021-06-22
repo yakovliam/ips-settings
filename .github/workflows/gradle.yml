@@ -36,10 +36,11 @@ jobs:
     - name: Generate output
       run: ./gradlew bootRun
 
-    - uses: actions/upload-artifact@v2
+    - name: Upload output files
+      uses: actions/upload-artifact@v2
       with:
         name: output
         path: |
-          assets/*/*.set
-          */*.set.output.xml
+          assets/input/*.set
+          output/*.set.output.xml
         if-no-files-found: error
