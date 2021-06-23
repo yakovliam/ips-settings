@@ -7,60 +7,67 @@ import com.tarigma.ipssettings.parser.container.parameter.ParameterParser;
 
 public class GEParameterParser implements ParameterParser<Parameter<ParameterDataType>> {
 
+    /**
+     * Parses an input parameter string into a parameter
+     * <p>
+     * The input string usually looks like {@code <Key>: <Value> <Unit>}
+     *
+     * @param s input string
+     * @return parameter
+     */
     @Override
     public Parameter<ParameterDataType> parse(String s) {
-        // get data
-        int lastIndexOf = s.lastIndexOf(":") == -1 ?
-                s.length() : s.lastIndexOf(":");
-        String key = s.substring(0, lastIndexOf);
-        String valueAsStringWithUnits;
+        int lastIndexOfColon = s.lastIndexOf(":");
+
+        // if there is no detected colon, set the last index to the
+        // end of the string, so we can just handle the entire thing
+        if (lastIndexOfColon == -1) {
+            lastIndexOfColon = s.length();
+        }
+
+        // first part (<Key>)
+        String key = s.substring(0, lastIndexOfColon);
+
+        // second part (<Value> <Unit>)
+        String valueWithUnits;
 
         try {
-            valueAsStringWithUnits = s.substring(lastIndexOf + 1).trim();
+            // try to get the second part
+            valueWithUnits = s.substring(lastIndexOfColon + 1).trim();
         } catch (IndexOutOfBoundsException e) {
-            valueAsStringWithUnits = "";
+            // unable to get the second part, so that means that there's no value
+            valueWithUnits = "";
         }
 
-        // strip units
-        String valueAsString = valueAsStringWithUnits.contains(" ") ?
-                valueAsStringWithUnits.split(" ")[0] : valueAsStringWithUnits;
+        // remove units from the string that contains the value and units
+        String value;
 
-        // detect value type
-        ParameterDataType parameterDataType = determineValueDataType(valueAsString);
+        // remove units from the string that contains the value and units by checking if it contains a space.
+        // If so, that means the units are separated by a space
+        if (valueWithUnits.contains(" ")) {
+            value = valueWithUnits.split(" ")[0];
+        } else {
+            // no space (no units), so that means we can just set the value with no units
+            value = valueWithUnits;
+        }
 
-        Parameter<ParameterDataType> parameter = Parameter.with(parameterDataType);
+        // determine data type of the value
+        ParameterDataType determinedParameterDataType = ParameterDataType.determineDataTypeByValue(value);
+        // create a new parameter object that has the data type we determined
+        Parameter<ParameterDataType> parameter = Parameter.with(determinedParameterDataType);
 
-        // build localization
-        Localization localization = new Localization()
-                .setEnuLang3Description(key)
-                .setEnuLang3Name(key);
+        // if available, set value
+        if (value != null && !value.isEmpty()) {
+            parameter.setValue(value);
+        }
 
-        return parameter.setDataType(parameterDataType)
-                .setDescription(key)
-                .setName(key)
+        // // create localization
+        // Localization localization = new Localization()
+        //         .setEnuLang3Description(key)
+        //         .setEnuLang3Name(key);
+
+        return parameter.setDescription(key) // set the description to the key
 //                .setLocalization(localization)
-                .setValue(valueAsString);
-    }
-
-    /**
-     * Determines the parameter data type of the given value
-     *
-     * @param value value
-     * @return data type
-     */
-    private ParameterDataType determineValueDataType(String value) {
-        try {
-            Double.parseDouble(value);
-            return ParameterDataType.DOUBLE;
-        } catch (NumberFormatException ignored) {
-        }
-
-        try {
-            Integer.parseInt(value);
-            return ParameterDataType.DOUBLE;
-        } catch (NumberFormatException ignored) {
-        }
-
-        return ParameterDataType.STRING;
+                .setName(key); // set the name to tge key
     }
 }

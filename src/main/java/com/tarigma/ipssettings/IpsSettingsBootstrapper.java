@@ -35,14 +35,14 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ContextRefre
         try {
             Path inputDirectory = Path.of(System.getProperty("user.dir"), "assets", "input");
             Files.walk(inputDirectory)
-                .filter(Files::isRegularFile)
-                .forEach(this::convert);
-            
+                    .filter(Files::isRegularFile)
+                    .forEach(this::convert);
+
         } catch (Exception e) {
             LOG.error("failed to walk input directory", e);
         }
     }
-    
+
     private void convert(Path input) {
         try {
             List<String> inputData = Files.readAllLines(input);
@@ -61,7 +61,7 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ContextRefre
 
             // write to output
             String outputFileName = input.getFileName().toString().concat(".output.xml");
-            Path outputDir = Path.of(System.getProperty("user.dir"), "output");
+            Path outputDir = Path.of(System.getProperty("user.dir"), "assets", "output");
             Files.createDirectories(outputDir);
             Files.writeString(outputDir.resolve(outputFileName), xmlContent);
         } catch (Exception e) {

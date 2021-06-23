@@ -35,4 +35,26 @@ public enum ParameterDataType {
     public String toString() {
         return getHandle()[0];
     }
+
+    /**
+     * Determines the parameter data type of the given value
+     *
+     * @param value value
+     * @return data type
+     */
+    public static ParameterDataType determineDataTypeByValue(String value) {
+        try {
+            Double.parseDouble(value);
+            return ParameterDataType.DOUBLE;
+        } catch (NumberFormatException ignored) {
+        }
+
+        try {
+            Integer.parseInt(value);
+            return ParameterDataType.DOUBLE;
+        } catch (NumberFormatException ignored) {
+        }
+
+        return ParameterDataType.STRING;
+    }
 }
