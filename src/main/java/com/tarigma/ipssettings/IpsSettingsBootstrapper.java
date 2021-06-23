@@ -23,6 +23,10 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ContextRefre
 
     private static final Logger LOG = LoggerFactory.getLogger(IpsSettingsBootstrapper.class);
 
+    private static final Path INPUT_DIR = Path.of(System.getProperty("user.dir"), "assets", "input");
+
+    private static final Path OUTPUT_DIR = Path.of(System.getProperty("user.dir"), "output");
+
     /**
      * Bootstrapper / entry point for the program
      *
@@ -33,8 +37,8 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ContextRefre
 
         // attempt conversion for each file in input directory
         try {
-            Path inputDirectory = Path.of(System.getProperty("user.dir"), "assets", "input");
-            Files.walk(inputDirectory)
+            Files.createDirectories(OUTPUT_DIR);
+            Files.walk(INPUT_DIR)
                     .filter(Files::isRegularFile)
                     .forEach(this::convert);
 
@@ -61,9 +65,7 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ContextRefre
 
             // write to output
             String outputFileName = input.getFileName().toString().concat(".output.xml");
-            Path outputDir = Path.of(System.getProperty("user.dir"), "output");
-            Files.createDirectories(outputDir);
-            Files.writeString(outputDir.resolve(outputFileName), xmlContent);
+            Files.writeString(OUTPUT_DIR.resolve(outputFileName), xmlContent);
         } catch (Exception e) {
             LOG.error("failed to convert: {}", input, e);
         }

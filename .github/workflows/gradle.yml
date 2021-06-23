@@ -40,7 +40,12 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: output
-        path: |
-          assets/input/*.set
-          output/*.set.output.xml
+        path: output/*.set.output.xml
+        if-no-files-found: error
+
+    - name: Upload input files
+      uses: actions/upload-artifact@v2
+      with:
+        name: output
+        path: assets/*/*.set
         if-no-files-found: error
