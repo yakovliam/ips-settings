@@ -6,57 +6,41 @@ import java.util.UUID;
 
 public class Block {
 
-    private UUID blockID;
-    
-    private UUID parentBlockID;
-    
-    private String blockPath;
-    
-    private String blockPathFromID;
-    
-    private String name;
+    private final UUID blockID;
+
+    private final Block parent;
+
+    private final String name;
     
     private String description;
+
+    public Block(String name, Block parent) {
+        this.name = name;
+        this.parent = parent;
+        this.blockID = UUID.nameUUIDFromBytes(getBlockPath().getBytes());
+    }
 
     @JacksonXmlProperty(isAttribute = true)
     public UUID getBlockID() {
         return blockID;
     }
 
-    public void setBlockID(UUID blockID) {
-        this.blockID = blockID;
-    }
-
     public UUID getParentBlockID() {
-        return parentBlockID;
-    }
-
-    public void setParentBlockID(UUID parentBlockID) {
-        this.parentBlockID = parentBlockID;
+        return parent == null ? null : parent.getBlockID();
     }
 
     public String getBlockPath() {
-        return blockPath;
-    }
-
-    public void setBlockPath(String blockPath) {
-        this.blockPath = blockPath;
+        String suffix = name + "/";
+        return parent == null ? suffix : parent.getBlockPath() + suffix;
     }
 
     public String getBlockPathFromID() {
-        return blockPathFromID;
-    }
-
-    public void setBlockPathFromID(String blockPathFromID) {
-        this.blockPathFromID = blockPathFromID;
+        String suffix = getBlockID().toString() + "/";
+        return parent == null ? suffix : parent.getBlockPathFromID() + suffix;
     }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDescription() {
