@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import com.tarigma.ipssettings.detector.InputTypeDetector;
@@ -19,7 +19,7 @@ import com.tarigma.ipssettings.parser.sel.SELParser;
 import com.tarigma.ipssettings.xml.RSEIContainerXMLWriter;
 
 @Component
-public class IpsSettingsBootstrapper implements ApplicationListener<ContextRefreshedEvent> {
+public class IpsSettingsBootstrapper implements ApplicationListener<ApplicationReadyEvent> {
 
     private static final Logger LOG = LoggerFactory.getLogger(IpsSettingsBootstrapper.class);
 
@@ -33,7 +33,7 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ContextRefre
      * @param event event
      */
     @Override
-    public void onApplicationEvent(ContextRefreshedEvent event) {
+    public void onApplicationEvent(ApplicationReadyEvent event) {
 
         // attempt conversion for each file in input directory
         try {
