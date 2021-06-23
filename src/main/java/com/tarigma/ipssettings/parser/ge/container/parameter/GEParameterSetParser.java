@@ -12,14 +12,14 @@ import java.util.Map;
 public class GEParameterSetParser implements ParameterSetParser {
 
     @Override
-    public ParameterSet parse(Map<String, List<String>> parameterLinesByBlockName, Map<String, Block> blocksByName) {
+    public ParameterSet parse(Map<String, List<String>> parameterLinesByBlockPath, Map<String, Block> blocksByPath) {
         // parameter parser is stateless and reusable
         var paramParser = new GEParameterParser();
 
         ParameterSet parameterSet = new ParameterSet();
 
         // iterate through each line
-        for (var entry : parameterLinesByBlockName.entrySet()) {
+        for (var entry : parameterLinesByBlockPath.entrySet()) {
             for (String current : entry.getValue()) {
                 Parameter<ParameterDataType> parameter = paramParser.parse(current);
                 if(parameter != null) {

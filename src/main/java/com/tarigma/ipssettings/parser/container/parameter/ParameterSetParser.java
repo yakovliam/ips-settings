@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface ParameterSetParser {
-    ParameterSet parse(Map<String, List<String>> parameterLinesByBlockName, Map<String, Block> blocksByName);
+    ParameterSet parse(Map<String, List<String>> parameterLinesByBlockPath, Map<String, Block> blocksByPath);
 }

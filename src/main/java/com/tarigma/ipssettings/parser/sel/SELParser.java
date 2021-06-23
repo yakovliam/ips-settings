@@ -67,15 +67,16 @@ public class SELParser implements RSEIParser {
         
         // construct new map of all lines after "CLASSES" block;
         // this is not space efficient
-        Map<String, List<String>> remainingLinesByBlockName = new LinkedHashMap<>();
-        iter.forEachRemaining(entry -> remainingLinesByBlockName.put(entry.getKey(), entry.getValue()));
+        Map<String, List<String>> remainingLinesByBlockPath = new LinkedHashMap<>();
+        // append trailing slash to block name in order to make a complete block path
+        iter.forEachRemaining(entry -> remainingLinesByBlockPath.put(entry.getKey() + "/", entry.getValue()));
         
         // map blocks by name for quick lookup
-        Map<String, Block> blocksByName = blocks.stream()
-                .collect(Collectors.toMap(Block::getName, Function.identity()));
+        Map<String, Block> blocksByPath = blocks.stream()
+                .collect(Collectors.toMap(Block::getBlockPath, Function.identity()));
 
         // parse parameter set
-        ParameterSet parameterSet = new SELParameterSetParser().parse(remainingLinesByBlockName, blocksByName);
+        ParameterSet parameterSet = new SELParameterSetParser().parse(remainingLinesByBlockPath, blocksByPath);
         rseiContainer.setParameterSet(parameterSet);
 
         return rseiContainer;

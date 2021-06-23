@@ -1,13 +1,18 @@
 package com.tarigma.ipssettings.parser.ge;
 
+import com.tarigma.ipssettings.model.Block;
 import com.tarigma.ipssettings.model.RSEIContainer;
 import com.tarigma.ipssettings.model.parameter.ParameterSet;
 import com.tarigma.ipssettings.parser.RSEIParser;
+import com.tarigma.ipssettings.parser.ge.container.GEBlocksParser;
 import com.tarigma.ipssettings.parser.ge.container.GEHeaderParser;
 import com.tarigma.ipssettings.parser.ge.container.parameter.GEParameterSetParser;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Parses SEL format input (comma separated) into the RSEI class structure
@@ -25,10 +30,17 @@ public class GEParser implements RSEIParser {
         // parsable data
         List<String> parsableData = strings.subList(7, strings.size());
 
-        // parse set
-        ParameterSet parameterSet = new GEParameterSetParser().parse(Collections.singletonMap("all-lines", parsableData), Collections.emptyMap());
+        // parse blocks
+        List<Block> blocks = new GEBlocksParser().parse(parsableData);
+        rseiContainer.setBlocks(blocks);
 
-        // set container
+        // map blocks by name for quick lookup
+        Map<String, Block> blocksByPath = blocks.stream()
+                .collect(Collectors.toMap(Block::getBlockPath, Function.identity()));
+
+        // parse parameters
+        // TODO - split leading block path from remainder of line, then group by path
+        ParameterSet parameterSet = new GEParameterSetParser().parse(Collections.singletonMap("all-lines", parsableData), blocksByPath);
         rseiContainer.setParameterSet(parameterSet);
 
         return rseiContainer;

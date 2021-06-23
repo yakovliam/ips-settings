@@ -12,15 +12,15 @@ import java.util.Map;
 public class SELParameterSetParser implements ParameterSetParser {
 
     @Override
-    public ParameterSet parse(Map<String, List<String>> linesByBlockName, Map<String, Block> blocksByName) {
+    public ParameterSet parse(Map<String, List<String>> parameterLinesByBlockPath, Map<String, Block> blocksByPath) {
         // parameter parser is stateless and reusable
         var paramParser = new SELParameterParser();
         
         ParameterSet parameterSet = new ParameterSet();
         
-        linesByBlockName.forEach((blockName, lines) -> {
+        parameterLinesByBlockPath.forEach((blockPath, lines) -> {
             // check for matching block definition
-            Block block = blocksByName.get(blockName);
+            Block block = blocksByPath.get(blockPath);
 
             lines.forEach(line -> {
                 Parameter<ParameterDataType> parameter = paramParser.parse(line);
