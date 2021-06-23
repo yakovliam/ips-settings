@@ -6,7 +6,6 @@ import com.tarigma.ipssettings.model.parameter.ParameterSet;
 import com.tarigma.ipssettings.parser.container.parameter.ParameterSetParser;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class GEParameterSetParser implements ParameterSetParser {
 

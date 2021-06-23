@@ -1,14 +1,9 @@
 package com.tarigma.ipssettings.parser.ge.container.parameter;
 
-import com.tarigma.ipssettings.model.RSEIContainer;
 import com.tarigma.ipssettings.model.parameter.Parameter;
 import com.tarigma.ipssettings.model.parameter.ParameterDataType;
 import com.tarigma.ipssettings.model.parameter.localization.Localization;
-import com.tarigma.ipssettings.model.parameter.localization.LocalizationUnit;
 import com.tarigma.ipssettings.parser.container.parameter.ParameterParser;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class GEParameterParser implements ParameterParser<Parameter<ParameterDataType>> {
 

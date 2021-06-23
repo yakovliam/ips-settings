@@ -1,9 +1,7 @@
 package com.tarigma.ipssettings.model.parameter;
 
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.tarigma.ipssettings.model.parameter.address.Address;
-import com.tarigma.ipssettings.model.parameter.localization.Localization;
 import com.tarigma.ipssettings.model.parameter.range.Range;
 
 import java.util.UUID;
