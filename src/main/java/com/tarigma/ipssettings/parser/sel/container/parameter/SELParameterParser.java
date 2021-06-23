@@ -124,6 +124,10 @@ public class SELParameterParser implements ParameterParser<Parameter<ParameterDa
             parameter.setDescription(descriptionAndUnits);
         }
 
+        if (!valueAsString.isEmpty()) {
+            parameter.setValue(valueAsString);
+        }
+
         // Localization localization = new Localization()
         //         .setEnuLang3Description(name)
         //         .setEnuLang3Name(descriptionAndUnits);
@@ -131,7 +135,6 @@ public class SELParameterParser implements ParameterParser<Parameter<ParameterDa
         parameter.setDataType(parameterDataType)
                 .setName(name)
 //                .setLocalization(localization)
-                .setValue(valueAsString)
                 .setRange(range);
 
         return parameter;
