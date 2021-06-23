@@ -19,11 +19,12 @@ public class SELParameterSetParser implements ParameterSetParser {
         ParameterSet parameterSet = new ParameterSet();
         
         linesByBlockName.forEach((blockName, lines) -> {
+            // check for matching block definition
+            Block block = blocksByName.get(blockName);
+
             lines.forEach(line -> {
-                Parameter<ParameterDataType> parameter = paramParser .parse(line);
+                Parameter<ParameterDataType> parameter = paramParser.parse(line);
                 if (parameter != null) {
-                    // check for matching block
-                    Block block = blocksByName.get(blockName);
                     if (block != null) {
                         parameter.setBlockId(block.getBlockID());
                     }
