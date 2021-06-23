@@ -6,6 +6,7 @@ import com.tarigma.ipssettings.parser.RSEIParser;
 import com.tarigma.ipssettings.parser.ge.container.GEHeaderParser;
 import com.tarigma.ipssettings.parser.ge.container.parameter.GEParameterSetParser;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public class GEParser implements RSEIParser {
         List<String> parsableData = strings.subList(7, strings.size());
 
         // parse set
-        ParameterSet parameterSet = new GEParameterSetParser().parse(parsableData);
+        ParameterSet parameterSet = new GEParameterSetParser().parse(Collections.singletonMap("all-lines", parsableData), Collections.emptyMap());
 
         // set container
         rseiContainer.setParameterSet(parameterSet);

@@ -1,9 +1,11 @@
 package com.tarigma.ipssettings.parser.container.parameter;
 
+import com.tarigma.ipssettings.model.Block;
 import com.tarigma.ipssettings.model.parameter.ParameterSet;
-import com.tarigma.ipssettings.parser.Parser;
 
 import java.util.List;
+import java.util.Map;
 
-public interface ParameterSetParser extends Parser<List<String>, ParameterSet> {
+public interface ParameterSetParser {
+    ParameterSet parse(Map<String, List<String>> parameterLinesByBlockName, Map<String, Block> blocksByName);
 }

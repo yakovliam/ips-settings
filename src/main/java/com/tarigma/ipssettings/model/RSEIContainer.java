@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.tarigma.ipssettings.model.parameter.ParameterSet;
@@ -105,6 +106,8 @@ public class RSEIContainer {
     @JacksonXmlProperty(localName = "ParameterSet")
     private ParameterSet parameterSet;
     
+    @JacksonXmlElementWrapper(localName = "Blocks")
+    @JacksonXmlProperty(localName = "Block")
     private List<Block> blocks;
     
     private Object enums;

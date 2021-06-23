@@ -1,15 +1,21 @@
 package com.tarigma.ipssettings.parser.sel;
 
+import com.tarigma.ipssettings.model.Block;
 import com.tarigma.ipssettings.model.RSEIContainer;
 import com.tarigma.ipssettings.model.parameter.ParameterSet;
 import com.tarigma.ipssettings.parser.RSEIParser;
+import com.tarigma.ipssettings.parser.sel.container.SELBlocksParser;
 import com.tarigma.ipssettings.parser.sel.container.SELHeaderParser;
 import com.tarigma.ipssettings.parser.sel.container.parameter.SELParameterSetParser;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Parses SEL format input (colon separated) into the RSEI class structure
@@ -17,66 +23,59 @@ import java.util.regex.Pattern;
 public class SELParser implements RSEIParser {
 
     /**
-     * Ignore block pattern
-     * <p>
-     * Example: {@code [CLASSES]}
+     * INFO block header
      */
-    private static final Pattern IGNORE_BLOCK_PATTERN = Pattern.compile("\\[.*\\]");
+    private static final String INFO_BLOCK_HEADER = "INFO";
 
     /**
-     * Info block header
+     * CLASSES block header
      */
-    private static final Pattern INFO_BLOCK_HEADER = Pattern.compile("\\[INFO\\]");
+    private static final String CLASSES_BLOCK_HEADER = "CLASSES";
 
     /**
-     * P1 or CM block header
+     * Arbitrary block header
      */
-    private static final Pattern P1_OR_CM_BLOCK_HEADER = Pattern.compile("\\[(P1|CM)\\]");
+    private static final Pattern BLOCK_HEADER = Pattern.compile("\\[(.*)\\]");
 
     @Override
     public RSEIContainer parse(List<String> strings) {
-        RSEIContainer rseiContainer = new RSEIContainer();
-
-        // current index
-        int index = 0;
-        // iterate
-        Iterator<String> iterator = strings.iterator();
-        while (iterator.hasNext()) {
-            String current = iterator.next();
-            index++;
-
-            // match info block header
-            if (current.matches(INFO_BLOCK_HEADER.pattern())) {
-                List<String> headerData = new ArrayList<>();
-                boolean done = false;
-                // loop / iterate until end of info block
-                while (iterator.hasNext()) {
-                    String curr2 = iterator.next();
-                    if (curr2.matches(IGNORE_BLOCK_PATTERN.pattern())) {
-                        break;
-                    } else {
-                        headerData.add(curr2);
-                    }
-                }
-
-                // parse header data
-                rseiContainer = new SELHeaderParser().parse(headerData);
-            }
-
-            // keep iterating until p1 block header
-            if (current.matches(P1_OR_CM_BLOCK_HEADER.pattern())) {
-                // this means everything after the current block is parsable data. so let's use the current index to
-                // grab that from the string list and parse it
-                break;
+        // blocks will maintain insertion order
+        Map<String, List<String>> linesByBlockName = new LinkedHashMap<>();
+        
+        String currentBlockName = null;
+        for (String currentLine : strings) {
+            Matcher m = BLOCK_HEADER.matcher(currentLine);
+            if (m.matches()) {
+                // line is a block header
+                currentBlockName = m.group(1);
+                linesByBlockName.put(currentBlockName, new ArrayList<>());
+            } else {
+                linesByBlockName.get(currentBlockName).add(currentLine);
             }
         }
+        
+        // parse info
+        RSEIContainer rseiContainer = new SELHeaderParser().parse(linesByBlockName.get(INFO_BLOCK_HEADER));
 
-        List<String> parameterData = strings.subList(index, strings.size());
+        // parse blocks
+        List<Block> blocks = new SELBlocksParser().parse(linesByBlockName.get(CLASSES_BLOCK_HEADER));
+        rseiContainer.setBlocks(blocks);
 
-        // parse parameter data
-        ParameterSet parameterSet = new SELParameterSetParser().parse(parameterData);
+        // get iterator that will begin immediately after "CLASSES" block 
+        var iter = linesByBlockName.entrySet().iterator();
+        while (iter.hasNext() && !CLASSES_BLOCK_HEADER.equals(iter.next().getKey()));
+        
+        // construct new map of all lines after "CLASSES" block;
+        // this is not space efficient
+        Map<String, List<String>> remainingLinesByBlockName = new LinkedHashMap<>();
+        iter.forEachRemaining(entry -> remainingLinesByBlockName.put(entry.getKey(), entry.getValue()));
+        
+        // map blocks by name for quick lookup
+        Map<String, Block> blocksByName = blocks.stream()
+                .collect(Collectors.toMap(Block::getName, Function.identity()));
 
-        // compile object
+        // parse parameter set
+        ParameterSet parameterSet = new SELParameterSetParser().parse(remainingLinesByBlockName, blocksByName);
         rseiContainer.setParameterSet(parameterSet);
 
         return rseiContainer;

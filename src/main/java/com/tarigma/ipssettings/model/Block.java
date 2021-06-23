@@ -1,5 +1,7 @@
 package com.tarigma.ipssettings.model;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 import java.util.UUID;
 
 public class Block {
@@ -16,6 +18,7 @@ public class Block {
     
     private String description;
 
+    @JacksonXmlProperty(isAttribute = true)
     public UUID getBlockID() {
         return blockID;
     }
