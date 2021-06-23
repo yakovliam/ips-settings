@@ -48,6 +48,7 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ApplicationR
     }
 
     private void convert(Path input) {
+    	LOG.info("converting input file: {}", input.getFileName());
         try {
             List<String> inputData = Files.readAllLines(input);
 
@@ -66,6 +67,7 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ApplicationR
             // write to output
             String outputFileName = input.getFileName().toString().concat(".output.xml");
             Files.writeString(OUTPUT_DIR.resolve(outputFileName), xmlContent);
+            LOG.info("    wrote output file: {}", outputFileName);
         } catch (Exception e) {
             LOG.error("failed to convert: {}", input, e);
         }
