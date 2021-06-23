@@ -61,7 +61,7 @@ public class SELParser implements RSEIParser {
         List<Block> blocks = new SELBlocksParser().parse(linesByBlockName.get(CLASSES_BLOCK_HEADER));
         rseiContainer.setBlocks(blocks);
 
-        // get iterator that will begin immediately after "CLASSES" block 
+        // get iterator that will begin immediately after "CLASSES" block
         var iter = linesByBlockName.entrySet().iterator();
         while (iter.hasNext() && !CLASSES_BLOCK_HEADER.equals(iter.next().getKey()));
         
