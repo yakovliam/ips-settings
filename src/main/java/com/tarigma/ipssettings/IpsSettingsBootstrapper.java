@@ -61,7 +61,7 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ContextRefre
 
             // write to output
             String outputFileName = input.getFileName().toString().concat(".output.xml");
-            Path outputDir = Path.of(System.getProperty("user.dir"), "assets", "output");
+            Path outputDir = Path.of(System.getProperty("user.dir"), "output");
             Files.createDirectories(outputDir);
             Files.writeString(outputDir.resolve(outputFileName), xmlContent);
         } catch (Exception e) {
