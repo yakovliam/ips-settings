@@ -15,6 +15,6 @@ public class InputTypeDetector {
      * @return input type
      */
     public static InputTypeRelation findInputType(List<String> fileData) {
-        return fileData.get(0).startsWith(InputTypeRelation.GE.getStartLineRelation()) ? InputTypeRelation.GE : InputTypeRelation.SEL;
+        return fileData.get(0).startsWith(InputTypeRelation.SEL.getStartLineRelation()) ? InputTypeRelation.SEL : InputTypeRelation.GE;
     }
 }
