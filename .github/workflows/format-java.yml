@@ -16,10 +16,10 @@ jobs:
           git checkout -b format-java-${{ github.run_number }}
 
       - name: Install formatter
-        run: npm -g install prettier prettier-plugin-java
+        run: npm install prettier prettier-plugin-java
 
       - name: Format Java
-        run: prettier --write "src/**/*.java"
+        run: npx prettier --write "src/**/*.java"
 
       - name: Push changes
         run: |
