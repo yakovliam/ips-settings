@@ -19,7 +19,7 @@ jobs:
         run: npm install --no-save prettier prettier-plugin-java
 
       - name: Format Java
-        run: npx prettier --write "src/**/*.java"
+        run: npx prettier --write "src/main/**/*.java"
 
       - name: Push changes
         run: |
