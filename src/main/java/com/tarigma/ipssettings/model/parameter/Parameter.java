@@ -71,6 +71,7 @@ public class Parameter<T extends Enum<ParameterDataType>> {
 //    @JacksonXmlProperty(localName = "Localization")
 //    @JacksonXmlElementWrapper(useWrapping = false)
 //    private Localization localization;
+
     public UUID getBlockId() {
         return blockId;
     }
