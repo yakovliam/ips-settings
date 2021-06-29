@@ -18,11 +18,11 @@ public class SELBlocksParser implements BlocksParser {
                     String blockName = parts[0].replace("\"", "");
                     String blockDescription = parts[1].replace("\"", "");
 
-                    Block block = new Block(blockName, null);
                     if (!blockDescription.isEmpty()) {
-                        block.setDescription(blockDescription);
+                        return new Block(blockName, blockDescription, null);
+                    } else {
+                        return new Block(blockName, null, null);
                     }
-                    return block;
                 })
                 .collect(Collectors.toList());
     }

@@ -50,8 +50,7 @@ public class GEBlocksParser implements BlocksParser {
                 
                 // attach parent; may be null
                 Block parentBlock = blocksByPath.get(parentBlockPath);
-                Block block = new Block(thisBlockName, parentBlock);
-                block.setDescription(thisBlockName);
+                Block block = new Block(thisBlockName, thisBlockName, parentBlock);
                 blocksByPath.put(thisBlockPath, block);
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("parsed block: {}", thisBlockPath);

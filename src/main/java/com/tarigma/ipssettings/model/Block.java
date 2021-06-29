@@ -12,10 +12,11 @@ public class Block {
 
     private final String name;
     
-    private String description;
+    private final String description;
 
-    public Block(String name, Block parent) {
+    public Block(String name, String description, Block parent) {
         this.name = name;
+        this.description = description;
         this.parent = parent;
         this.blockID = UUID.nameUUIDFromBytes(getBlockPath().getBytes());
     }
@@ -45,9 +46,5 @@ public class Block {
 
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }
