@@ -35,7 +35,7 @@ public class GEParser implements RSEIParser {
     @Override
     public RSEIContainer parse(List<String> strings) {
 
-        // first 7 lines are header information
+        // first lines are header information
         List<String> headerData = strings.subList(0, LINES_IN_HEADER);
         // parse
         RSEIContainer rseiContainer = new GEHeaderParser().parse(headerData);
