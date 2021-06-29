@@ -20,9 +20,16 @@ public class GEParameterSetParser implements ParameterSetParser {
 
         // iterate through each line
         for (var entry : parameterLinesByBlockPath.entrySet()) {
+            // lookup possible block
+            String blockPath = entry.getKey();
+            Block block = blocksByPath.get(blockPath);
+
             for (String current : entry.getValue()) {
                 Parameter<ParameterDataType> parameter = paramParser.parse(current);
                 if(parameter != null) {
+                    if (block != null) {
+                        parameter.setBlockId(block.getBlockID());
+                    }
                     // add to set
                     parameterSet.addToParameterSet(parameter);
                 }

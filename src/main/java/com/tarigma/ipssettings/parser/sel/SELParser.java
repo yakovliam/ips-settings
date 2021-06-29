@@ -9,6 +9,7 @@ import com.tarigma.ipssettings.parser.sel.container.SELHeaderParser;
 import com.tarigma.ipssettings.parser.sel.container.parameter.SELParameterSetParser;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +59,7 @@ public class SELParser implements RSEIParser {
         RSEIContainer rseiContainer = new SELHeaderParser().parse(linesByBlockName.get(INFO_BLOCK_HEADER));
 
         // parse blocks
-        List<Block> blocks = new SELBlocksParser().parse(linesByBlockName.get(CLASSES_BLOCK_HEADER));
+        Collection<Block> blocks = new SELBlocksParser().parse(linesByBlockName.get(CLASSES_BLOCK_HEADER));
         rseiContainer.setBlocks(blocks);
 
         // get iterator that will begin immediately after "CLASSES" block

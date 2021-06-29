@@ -2,7 +2,7 @@ package com.tarigma.ipssettings.model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.util.Collection;
 import java.util.UUID;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
@@ -108,7 +108,7 @@ public class RSEIContainer {
     
     @JacksonXmlElementWrapper(localName = "Blocks")
     @JacksonXmlProperty(localName = "Block")
-    private List<Block> blocks;
+    private Collection<Block> blocks;
     
     private Object enums;
 
@@ -247,11 +247,11 @@ public class RSEIContainer {
         return this;
     }
 
-    public List<Block> getBlocks() {
+    public Collection<Block> getBlocks() {
         return blocks;
     }
 
-    public void setBlocks(List<Block> blocks) {
+    public void setBlocks(Collection<Block> blocks) {
         this.blocks = blocks;
     }
 

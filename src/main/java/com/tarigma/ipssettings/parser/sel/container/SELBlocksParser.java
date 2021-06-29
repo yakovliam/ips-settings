@@ -1,5 +1,6 @@
 package com.tarigma.ipssettings.parser.sel.container;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,7 +10,7 @@ import com.tarigma.ipssettings.parser.container.BlocksParser;
 public class SELBlocksParser implements BlocksParser {
 
     @Override
-    public List<Block> parse(List<String> lines) {
+    public Collection<Block> parse(List<String> lines) {
 
         return lines.stream()
                 .map(line -> {
