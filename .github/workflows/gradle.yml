@@ -40,12 +40,12 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: output
-        path: output/*.set.output.xml
+        path: output/**/*.set.rsei.xml
         if-no-files-found: error
 
     - name: Upload input files
       uses: actions/upload-artifact@v2
       with:
         name: output
-        path: assets/*/*.set
+        path: assets/**/*.set
         if-no-files-found: error
