@@ -27,6 +27,9 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ApplicationR
     @Value("#{ T(java.nio.file.Path).of('${gem.ips-settings.input-dir}') }")
     private Path inputDir;
 
+    @Value("${gem.ips-settings.input-filename-suffix}")
+    private String inputFilenameSuffix;
+
     @Value("#{ T(java.nio.file.Path).of('${gem.ips-settings.output-dir}') }")
     private Path outputDir;
 
@@ -42,6 +45,7 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ApplicationR
         try {
             Files.walk(inputDir)
                     .filter(Files::isRegularFile)
+                    .filter(path -> path.toString().endsWith(inputFilenameSuffix))
                     .forEach(this::convert);
 
         } catch (Exception e) {
