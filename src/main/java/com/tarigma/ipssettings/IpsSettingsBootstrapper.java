@@ -24,10 +24,10 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ApplicationR
 
     private static final Logger LOG = LoggerFactory.getLogger(IpsSettingsBootstrapper.class);
 
-    @Value("${gem.ips-settings.input-dir}")
+    @Value("#{ T(java.nio.file.Path).of('${gem.ips-settings.input-dir}') }")
     private Path inputDir;
 
-    @Value("${gem.ips-settings.output-dir}")
+    @Value("#{ T(java.nio.file.Path).of('${gem.ips-settings.output-dir}') }")
     private Path outputDir;
 
     /**
@@ -40,7 +40,6 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ApplicationR
 
         // attempt conversion for each file in input directory
         try {
-            Files.createDirectories(outputDir);
             Files.walk(inputDir)
                     .filter(Files::isRegularFile)
                     .forEach(this::convert);
@@ -67,9 +66,11 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ApplicationR
             // convert container into XML
             String xmlContent = new RSEIContainerXMLWriter().write(container);
 
-            // write to output
+            // write to output in same folder structure as input
             String outputFileName = input.getFileName().toString().concat(".rsei.xml");
-            Files.writeString(outputDir.resolve(outputFileName), xmlContent);
+            Path outputDestDir = outputDir.resolve(inputDir.relativize(input.getParent()));
+            Files.createDirectories(outputDestDir);
+            Files.writeString(outputDestDir.resolve(outputFileName), xmlContent);
             LOG.info("    wrote output file: {}", outputFileName);
         } catch (Exception e) {
             LOG.error("failed to convert: {}", input, e);
