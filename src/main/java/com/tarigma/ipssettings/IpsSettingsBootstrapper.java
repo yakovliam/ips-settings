@@ -68,7 +68,7 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ApplicationR
             String xmlContent = new RSEIContainerXMLWriter().write(container);
 
             // write to output
-            String outputFileName = input.getFileName().toString().concat(".output.xml");
+            String outputFileName = input.getFileName().toString().concat(".rsei.xml");
             Files.writeString(outputDir.resolve(outputFileName), xmlContent);
             LOG.info("    wrote output file: {}", outputFileName);
         } catch (Exception e) {
