@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
@@ -23,9 +24,11 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ApplicationR
 
     private static final Logger LOG = LoggerFactory.getLogger(IpsSettingsBootstrapper.class);
 
-    private static final Path INPUT_DIR = Path.of(System.getProperty("user.dir"), "assets", "input");
+    @Value("${gem.ips-settings.input-dir}")
+    private Path inputDir;
 
-    private static final Path OUTPUT_DIR = Path.of(System.getProperty("user.dir"), "output");
+    @Value("${gem.ips-settings.output-dir}")
+    private Path outputDir;
 
     /**
      * Bootstrapper / entry point for the program
@@ -37,8 +40,8 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ApplicationR
 
         // attempt conversion for each file in input directory
         try {
-            Files.createDirectories(OUTPUT_DIR);
-            Files.walk(INPUT_DIR)
+            Files.createDirectories(outputDir);
+            Files.walk(inputDir)
                     .filter(Files::isRegularFile)
                     .forEach(this::convert);
 
@@ -66,7 +69,7 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ApplicationR
 
             // write to output
             String outputFileName = input.getFileName().toString().concat(".output.xml");
-            Files.writeString(OUTPUT_DIR.resolve(outputFileName), xmlContent);
+            Files.writeString(outputDir.resolve(outputFileName), xmlContent);
             LOG.info("    wrote output file: {}", outputFileName);
         } catch (Exception e) {
             LOG.error("failed to convert: {}", input, e);
