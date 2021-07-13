@@ -23,8 +23,13 @@ public class SELHeaderParser implements HeaderParser {
             String current = iterator.next();
 
             // split by key val (=) and parse
-
             String[] data = current.split("=", 2);
+
+            // ignore lines that don't match the pattern
+            if (data.length < 2) {
+                continue;
+            }
+
             String key = data[0];
             String value = data[1];
 
