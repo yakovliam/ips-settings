@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
-
+import com.tarigma.ipssettings.csv.RSEIContainerCSVWriter;
 import com.tarigma.ipssettings.detector.InputTypeDetector;
 import com.tarigma.ipssettings.detector.InputTypeRelation;
 import com.tarigma.ipssettings.model.RSEIContainer;
@@ -70,12 +70,21 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ApplicationR
             // convert container into XML
             String xmlContent = new RSEIContainerXMLWriter().write(container);
 
-            // write to output in same folder structure as input
-            String outputFileName = input.getFileName().toString().concat(".rsei.xml");
             Path outputDestDir = outputDir.resolve(inputDir.relativize(input.getParent()));
             Files.createDirectories(outputDestDir);
+
+            // write XML to output in same folder structure as input
+            String outputFileName = input.getFileName().toString().concat(".rsei.xml");
             Files.writeString(outputDestDir.resolve(outputFileName), xmlContent);
             LOG.info("    wrote output file: {}", outputFileName);
+
+            // convert container into CSV
+            String csvContent = new RSEIContainerCSVWriter().write(container);
+
+            // write CSV to output in same folder structure as input
+            String csvOutputFileName = input.getFileName().toString().concat(".csv");
+            Files.writeString(outputDestDir.resolve(csvOutputFileName), csvContent);
+            LOG.info("    wrote output file: {}", csvOutputFileName);
         } catch (Exception e) {
             LOG.error("failed to convert: {}", input, e);
         }
