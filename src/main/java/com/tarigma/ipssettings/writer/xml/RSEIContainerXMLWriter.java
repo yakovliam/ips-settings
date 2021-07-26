@@ -1,4 +1,4 @@
-package com.tarigma.ipssettings.xml;
+package com.tarigma.ipssettings.writer.xml;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
@@ -6,8 +6,9 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.tarigma.ipssettings.model.RSEIContainer;
+import com.tarigma.ipssettings.writer.Writer;
 
-public class RSEIContainerXMLWriter implements XMLWriter<RSEIContainer, String> {
+public class RSEIContainerXMLWriter implements Writer<RSEIContainer, String> {
 
     /**
      * Writes an rsei container to an xml document

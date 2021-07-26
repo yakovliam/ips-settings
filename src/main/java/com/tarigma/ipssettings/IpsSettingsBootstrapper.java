@@ -10,14 +10,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
-import com.tarigma.ipssettings.csv.RSEIContainerCSVWriter;
+import com.tarigma.ipssettings.writer.csv.RSEIContainerCSVWriter;
 import com.tarigma.ipssettings.detector.InputTypeDetector;
 import com.tarigma.ipssettings.detector.InputTypeRelation;
 import com.tarigma.ipssettings.model.RSEIContainer;
 import com.tarigma.ipssettings.parser.RSEIParser;
 import com.tarigma.ipssettings.parser.ge.GEParser;
 import com.tarigma.ipssettings.parser.sel.SELParser;
-import com.tarigma.ipssettings.xml.RSEIContainerXMLWriter;
+import com.tarigma.ipssettings.writer.xml.RSEIContainerXMLWriter;
 
 @Component
 public class IpsSettingsBootstrapper implements ApplicationListener<ApplicationReadyEvent> {

@@ -1,8 +1,8 @@
-package com.tarigma.ipssettings.xml;
+package com.tarigma.ipssettings.writer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-public interface XMLWriter<K, V> {
+public interface Writer<K, V> {
 
     /**
      * Writes a V from a K
