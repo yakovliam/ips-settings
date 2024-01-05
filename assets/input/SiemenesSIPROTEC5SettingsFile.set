@@ -1,0 +1,534 @@
+[General.Device]
+Rated frequency : 50 Hz 
+Minimum operate time : 0.00 s
+Set. format residu. comp. : Kr, Kx 
+Block monitoring dir. : off 
+Station name : SE EVORA V7.30 
+[General.Chatter blocking]
+No. permis.state changes : 0 
+Initial test time : 1 s
+No. of chatter tests : 0 
+Chatter idle time : 1 min
+Subsequent test time : 2 s
+[General.Change group]
+Number settings groups : 1 
+Activat. of settings group : via binary input 
+Blk setting change : false 
+Reserv.time for com.prot. : 120 s
+[General.Time sync.]
+Time source 1 : SNTP 
+Time source 1 port : port E 
+Time source 2 : none 
+Time zone time source 1 : UTC 
+Time zone time source 2 : local 
+Fault indication after : 600 s
+Sync. latency PPS : 0.00 µs
+[General.CFC]
+CFC chart quality handling : manual 
+[General.Test support]
+Activate device test mode : false 
+Oper.bin.outp. under test : false 
+[Power system.General]
+Phase sequence : ABC 
+[Power system.Meas.point I-3ph 1.General]
+CT connection : 3-phase + IN-separate 
+Tracking : active 
+Measuring-point ID : 1 
+[Power system.Meas.point I-3ph 1.CT phases]
+Rated primary current : 300.0 A
+Rated secondary current : 1 A 
+Current range : 20 x IR 
+Internal CT type : CT protection 
+Neutr.point in dir.of ref.obj : no 
+Inverted phases : none 
+[Power system.Meas.point I-3ph 1.CT IN]
+Rated primary current : 100.0 A
+Rated secondary current : 1 A 
+Current range : 1 
+Internal CT type : CT measurement 
+[Power system.Meas.point I-3ph 1.CT 1]
+Magnitude correction : 1.000 
+Phase : I A 
+[Power system.Meas.point I-3ph 1.CT 2]
+Magnitude correction : 1.000 
+Phase : I B 
+[Power system.Meas.point I-3ph 1.CT 3]
+Magnitude correction : 1.000 
+Phase : I C 
+[Power system.Meas.point I-3ph 1.CT 4]
+Magnitude correction : 1.000 
+Phase : I A 
+[Power system.Meas.point I-3ph 1.Brk.wire det.]
+Mode : off 
+[Power system.Meas.point I-3ph 1.Supv. balan. I]
+Mode : off 
+Release threshold : 0.500 A
+Threshold min/max : 0.50 
+Delay failure indication : 5.00 s
+[Power system.Meas.point I-3ph 1.Supv. ph.seq.I]
+Mode : off 
+Delay failure indication : 5.00 s
+Release threshold : 1.667 A
+[Power system.Meas.point I-3ph 1.Supv. sum I]
+Mode : off 
+Threshold : 0.100 A
+Slope factor : 0.10 
+Delay failure indication : 5.00 s
+[Power system.Meas.point V-3ph 1.General]
+Rated primary voltage : 11.000 kV
+Rated secondary voltage : 110 V
+Matching ratio Vph / VN : 1.73 
+VT connection : 3 ph-to-gnd volt. + VN 
+Inverted phases : none 
+Tracking : active 
+Measuring-point ID : 2 
+Internal VT type : Voltage transformer 
+[Power system.Meas.point V-3ph 1.VT 1]
+Magnitude correction : 1.000 
+Phase : V A 
+[Power system.Meas.point V-3ph 1.VT 2]
+Magnitude correction : 1.000 
+Phase : V B 
+[Power system.Meas.point V-3ph 1.VT 3]
+Magnitude correction : 1.000 
+Phase : V A 
+[Power system.Meas.point V-3ph 1.VT 4]
+Magnitude correction : 1.000 
+Phase : V A 
+[Power system.Meas.point V-3ph 1.Supv. balan. V]
+Mode : off 
+Release threshold : 55.000 V
+Threshold min/max : 0.75 
+Delay failure indication : 5.00 s
+[Power system.Meas.point V-3ph 1.Supv. ph.seq.V]
+Mode : off 
+Delay failure indication : 5.00 s
+[Power system.Meas.point V-3ph 1.Supv. sum V]
+Mode : off 
+Threshold : 27.500 V
+Delay failure indication : 5.00 s
+[Power system.Meas.point V-3ph 1.VT miniatureCB]
+Response time : 0.00 s
+[Recording.Fault recorder.Control]
+Fault recording : with pickup & AR cyc. 
+Storage : always 
+Maximum record time : 1.23 s
+Pre-trigger time : 0.50 s
+Post-trigger time : 0.50 s
+Manual record time : 0.50 s
+Sampling frequency : 4 kHz 
+Sampl. freq. IEC 61850 rec. : 1 kHz 
+COMTRADE revision year : COMTRADE 1999 
+Scaling COMTRADE : Secondary values 
+Cal.zero.seq.cur.channel : no 
+Cal.zero seq.volt.channel : no 
+[Security.Security Logging.Sec. Ev. Logg..General]
+Security log cap. warn. : 80 %
+[Security.Security Logging.Sec. Ev. Logg..syslog server A]
+Enable logging : false 
+[Security.Security Logging.Sec. Ev. Logg..syslog server B]
+Enable logging : false 
+[Security.Access control.User cache]
+User cache size : 60 
+[Security.Access control.Login attempts]
+Max. login attempts : 5 
+Time lapse : 5 min
+Blocked duration : 30 min
+[Security.DIGSI access]
+Integrated Port J : read and write access 
+Module Port E : read and write access 
+[Security.MMS access]
+Module Port E : read and write access 
+[Security.Web access]
+Integrated Port J : read and write access 
+Module Port E : read and write access 
+[Security.Client Auth]
+Trusted CA : error reading string 
+[DISJUNTOR.General.Ref. for %-values]
+Rated normal current : 300.00 A
+Rated voltage : 11.00 kV
+[DISJUNTOR.General.Breaker settings]
+Current thresh. CB open : 0.030 A
+[DISJUNTOR.Trip logic]
+Reset of trip command : with I< 
+[DISJUNTOR.Circuit break.]
+Output time : 0.14 s
+Indicat. of breaking values : always 
+[DISJUNTOR.Manual close]
+Action time : 0.25 s
+CB open dropout delay : 0.00 s
+[DISJUNTOR.Control]
+Control model : SBO w. enh. security 
+SBO time-out : 30.00 s
+Feedback monitoring time : 1.00 s
+[DISJUNTOR.CB test]
+Dead time : 0.10 s
+Trip only : false 
+Consider current criterion : false 
+[DISJUNTOR.50BF CB fail]
+Mode : on 
+Holding int. start signal : yes 
+Start via binary input : 1 channel 
+Holding ext. start signal : no 
+CB aux.cont. crit. allowed : w. 'CB pos. closed 3p.' 
+Dropout : with effective criterion 
+Retrip after T1 : no 
+Threshold phase current : 0.030 A
+Threshold sensitive : 0.030 A
+Delay T1 for 3-pole retrip : 0.050 s
+Delay T2 for 3-pole trip : 0.250 s
+Minimum operate time : 0.12 s
+3I0 criterion : Plausibility check 
+I2 criterion : Plausibility check 
+Threshold 3I0 dir. release : 0.001 A
+Threshold I2 dir. release : 0.030 A
+Monit. time for BI ">Start" : 15.00 s
+[DISJUNTOR.79 Auto. reclosing.General.General]
+Mode : on 
+79 operating mode : with op., with act. time 
+CB ready check bef. start : no 
+Reclai. time aft.succ.cyc. : 60.00 s
+Block. time aft. man.close : 10.00 s
+Start signal supervis.time : 0.50 s
+CB ready superv. time : 3.00 s
+Evolving-fault detection : with pickup 
+Response to evolv. faults : blocks 79 
+Max. dead-time delay : 1.00 s
+Max. dead-time extension : -0.00 s
+Send delay f. remot. close : -0.00 s
+[DISJUNTOR.79 Auto. reclosing.General.DLC, RDT]
+Dead-line check/reduc.d.t : without 
+[DISJUNTOR.79 Auto. reclosing.Cycle 1]
+Start from idle state allow. : yes 
+Action time : -0.00 s
+Dead time aft. 3-pole trip : 0.30 s
+Dead time aft. evolv. fault : 0.30 s
+CB ready check bef.close : no 
+Synchroch. aft. 3-pole d.t. : none 
+[DISJUNTOR.79 Auto. reclosing.Cycle 2]
+Start from idle state allow. : yes 
+Action time : -0.00 s
+Dead time aft. 3-pole trip : 15.00 s
+Dead time aft. evolv. fault : 15.00 s
+CB ready check bef.close : no 
+Synchroch. aft. 3-pole d.t. : none 
+[DISJUNTOR.79 Auto. reclosing.Cycle 3]
+Start from idle state allow. : yes 
+Action time : -0.00 s
+Dead time aft. 3-pole trip : 30.00 s
+Dead time aft. evolv. fault : 30.00 s
+CB ready check bef.close : no 
+Synchroch. aft. 3-pole d.t. : none 
+[DISJUNTOR.CB wear monitoring.General]
+CB opening time : 0.040 s
+CB break time : 0.080 s
+CB make time : 0.080 s
+[DISJUNTOR.CB wear monitoring.I2t-method]
+Mode : on 
+Threshold : 10000.00 I/Ir*s
+[VI 3ph.General.Rated values]
+Rated current : 300 A
+Rated voltage : 11.00 kV
+Rated apparent power : 5.72 MVA
+[VI 3ph.General.Power-system data]
+Power-sys. neutral point : suppress. coil grounded 
+[VI 3ph.General.Measurements]
+P, Q sign : not reversed 
+[VI 3ph.Fault locator]
+Mode : on 
+Start : with operate 
+Load compensation : no 
+X per length unit : 0.2948 Ω/km
+Line length : 10.00 km
+Line angle : 85.00 °
+Kr : 1.00 
+Kx : 1.00 
+[VI 3ph.MIF.I&gt;.General]
+Mode : on 
+Operate & flt.rec. blocked : no 
+1-pole operate allowed : no 
+Dynamic settings : yes 
+Blk. w. inrush curr. detect. : no 
+Method of measurement : fundamental comp. 
+Threshold : 1.400 A
+Dropout ratio : 0.95 
+Pickup delay : 0.00 s
+Dropout delay : 0.00 s
+Operate delay : 1.00 s
+[VI 3ph.MIF.I&gt;.Dyn.s: AR off/n.rdy]
+Effect. by AR off/n.ready : no 
+Stage blocked : no 
+[VI 3ph.MIF.I&gt;.Dyn.set: AR cycle 1]
+Effected by AR cycle 1 : no 
+Stage blocked : yes 
+Threshold : 1.400 A
+Operate delay : 1.00 s
+[VI 3ph.MIF.I&gt;.Dyn.set: AR cycle 2]
+Effected by AR cycle 2 : no 
+Stage blocked : yes 
+Threshold : 1.400 A
+Operate delay : 1.00 s
+[VI 3ph.MIF.I&gt;.Dyn.set: AR cycle 3]
+Effected by AR cycle 3 : no 
+Stage blocked : yes 
+Threshold : 1.400 A
+Operate delay : 1.00 s
+[VI 3ph.MIF.I&gt;.Dyn.s: AR cycle&gt;3]
+Effected by AR cycle gr. 3 : no 
+Stage blocked : yes 
+Threshold : 1.400 A
+Operate delay : 1.00 s
+[VI 3ph.MIF.I&gt;.Dyn.set: bin.input]
+Effected by binary input : yes 
+Stage blocked : no 
+Threshold : 1.400 A
+Operate delay : 0.02 s
+[VI 3ph.MIF.I&gt;&gt;.General]
+Mode : on 
+Operate & flt.rec. blocked : no 
+1-pole operate allowed : no 
+Dynamic settings : yes 
+Blk. w. inrush curr. detect. : no 
+Method of measurement : fundamental comp. 
+Threshold : 2.000 A
+Dropout ratio : 0.95 
+Pickup delay : 0.00 s
+Dropout delay : 0.00 s
+Operate delay : 0.50 s
+[VI 3ph.MIF.I&gt;&gt;.Dyn.s: AR off/n.rdy]
+Effect. by AR off/n.ready : no 
+Stage blocked : no 
+[VI 3ph.MIF.I&gt;&gt;.Dyn.set: AR cycle 1]
+Effected by AR cycle 1 : yes 
+Stage blocked : no 
+Threshold : 2.000 A
+Operate delay : 0.05 s
+[VI 3ph.MIF.I&gt;&gt;.Dyn.set: AR cycle 2]
+Effected by AR cycle 2 : no 
+Stage blocked : yes 
+Threshold : 2.000 A
+Operate delay : 0.50 s
+[VI 3ph.MIF.I&gt;&gt;.Dyn.set: AR cycle 3]
+Effected by AR cycle 3 : no 
+Stage blocked : yes 
+Threshold : 2.000 A
+Operate delay : 0.50 s
+[VI 3ph.MIF.I&gt;&gt;.Dyn.s: AR cycle&gt;3]
+Effected by AR cycle gr. 3 : no 
+Stage blocked : yes 
+Threshold : 2.000 A
+Operate delay : 0.50 s
+[VI 3ph.MIF.I&gt;&gt;.Dyn.set: bin.input]
+Effected by binary input : yes 
+Stage blocked : no 
+Threshold : 2.000 A
+Operate delay : 0.02 s
+[VI 3ph.MIF.I&gt;&gt;&gt;.General]
+Mode : on 
+Operate & flt.rec. blocked : no 
+1-pole operate allowed : no 
+Dynamic settings : yes 
+Blk. w. inrush curr. detect. : no 
+Method of measurement : fundamental comp. 
+Threshold : 13.333 A
+Dropout ratio : 0.95 
+Pickup delay : 0.00 s
+Dropout delay : 0.00 s
+Operate delay : 0.10 s
+[VI 3ph.MIF.I&gt;&gt;&gt;.Dyn.s: AR off/n.rdy]
+Effect. by AR off/n.ready : no 
+Stage blocked : no 
+[VI 3ph.MIF.I&gt;&gt;&gt;.Dyn.set: AR cycle 1]
+Effected by AR cycle 1 : no 
+Stage blocked : yes 
+Threshold : 13.333 A
+Operate delay : 0.00 s
+[VI 3ph.MIF.I&gt;&gt;&gt;.Dyn.set: AR cycle 2]
+Effected by AR cycle 2 : no 
+Stage blocked : yes 
+Threshold : 13.333 A
+Operate delay : 0.10 s
+[VI 3ph.MIF.I&gt;&gt;&gt;.Dyn.set: AR cycle 3]
+Effected by AR cycle 3 : no 
+Stage blocked : yes 
+Threshold : 13.333 A
+Operate delay : 0.10 s
+[VI 3ph.MIF.I&gt;&gt;&gt;.Dyn.s: AR cycle&gt;3]
+Effected by AR cycle gr. 3 : no 
+Stage blocked : yes 
+Threshold : 13.333 A
+Operate delay : 0.10 s
+[VI 3ph.MIF.I&gt;&gt;&gt;.Dyn.set: bin.input]
+Effected by binary input : yes 
+Stage blocked : no 
+Threshold : 13.333 A
+Operate delay : 0.02 s
+[VI 3ph.MIH.General]
+Measured value : 3I0 calculated 
+[VI 3ph.MIH.Io&gt;.General]
+Mode : off 
+Operate & flt.rec. blocked : no 
+Dynamic settings : no 
+Blk. w. inrush curr. detect. : no 
+Method of measurement : fundamental comp. 
+Threshold : 0.267 A
+Dropout ratio : 0.95 
+Dropout delay : 0.00 s
+Operate delay : 0.25 s
+[VI 3ph.MIH.Io&gt;&gt;.General]
+Mode : on 
+Operate & flt.rec. blocked : no 
+Dynamic settings : yes 
+Blk. w. inrush curr. detect. : no 
+Method of measurement : fundamental comp. 
+Threshold : 0.300 A
+Dropout ratio : 0.95 
+Dropout delay : 0.00 s
+Operate delay : 0.15 s
+[VI 3ph.MIH.Io&gt;&gt;.Dyn.s: AR off/n.rdy]
+Effect. by AR off/n.ready : no 
+Stage blocked : no 
+[VI 3ph.MIH.Io&gt;&gt;.Dyn.set: AR cycle 1]
+Effected by AR cycle 1 : yes 
+Stage blocked : no 
+Threshold : 0.300 A
+Operate delay : 0.00 s
+[VI 3ph.MIH.Io&gt;&gt;.Dyn.set: AR cycle 2]
+Effected by AR cycle 2 : no 
+Stage blocked : yes 
+Threshold : 0.300 A
+Operate delay : 0.15 s
+[VI 3ph.MIH.Io&gt;&gt;.Dyn.set: AR cycle 3]
+Effected by AR cycle 3 : no 
+Stage blocked : yes 
+Threshold : 0.300 A
+Operate delay : 0.15 s
+[VI 3ph.MIH.Io&gt;&gt;.Dyn.s: AR cycle&gt;3]
+Effected by AR cycle gr. 3 : no 
+Stage blocked : yes 
+Threshold : 0.300 A
+Operate delay : 0.15 s
+[VI 3ph.MIH.Io&gt;&gt;.Dyn.set: bin.input]
+Effected by binary input : yes 
+Stage blocked : no 
+Threshold : 0.300 A
+Operate delay : 0.02 s
+[VI 3ph.PTR.General]
+Measured value : IN measured 
+[VI 3ph.PTR.PTR.General]
+Mode : on 
+Operate & flt.rec. blocked : no 
+Dynamic settings : no 
+Blk. w. inrush curr. detect. : no 
+Method of measurement : fundamental comp. 
+Threshold : 0.020 A
+Type of character. curve : IEC long-time inverse 
+Min. time of the curve : 0.00 s
+Reset : instantaneous 
+Time dial : 0.40 
+Additional time delay : 0.00 s
+[VI 3ph.MIHD (RNimp).General]
+Measured value : IN measured 
+Min. voltage V0 or V2 : 3.450 V
+Rotation angle of ref. volt. : 15 °
+Forward section +/- : 90 °
+Polarization with : zero sequence 
+[VI 3ph.MIHD (RNimp).MIHD (RNImp).General]
+Mode : on 
+Operate & flt.rec. blocked : no 
+Directional mode : forward 
+Method of measurement : fundamental comp. 
+Directional comparison : no 
+Release via input signal : no 
+Blk. by meas.-volt. failure : no 
+Dynamic settings : yes 
+Blk. w. inrush curr. detect. : no 
+Threshold : 0.400 A
+Dropout ratio : 0.95 
+Dropout delay : 0.00 s
+Operate delay : 0.50 s
+[VI 3ph.MIHD (RNimp).MIHD (RNImp).Dyn.s: AR off/n.rdy]
+Effect. by AR off/n.ready : no 
+Stage blocked : no 
+[VI 3ph.MIHD (RNimp).MIHD (RNImp).Dyn.set: AR cycle 1]
+Effected by AR cycle 1 : yes 
+Stage blocked : no 
+Threshold : 0.400 A
+Operate delay : 0.00 s
+[VI 3ph.MIHD (RNimp).MIHD (RNImp).Dyn.set: AR cycle 2]
+Effected by AR cycle 2 : no 
+Stage blocked : yes 
+Threshold : 0.400 A
+Operate delay : 0.50 s
+[VI 3ph.MIHD (RNimp).MIHD (RNImp).Dyn.set: AR cycle 3]
+Effected by AR cycle 3 : no 
+Stage blocked : yes 
+Threshold : 0.400 A
+Operate delay : 0.50 s
+[VI 3ph.MIHD (RNimp).MIHD (RNImp).Dyn.s: AR cycle&gt;3]
+Effected by AR cycle gr. 3 : no 
+Stage blocked : yes 
+Threshold : 0.400 A
+Operate delay : 0.50 s
+[VI 3ph.MIHD (RNimp).MIHD (RNImp).Dyn.set: bin.input]
+Effected by binary input : yes 
+Stage blocked : no 
+Threshold : 0.400 A
+Operate delay : 0.02 s
+[VI 3ph.MIHD (RNisol).General]
+Measured value : IN measured 
+Min. voltage V0 or V2 : 8.650 V
+Rotation angle of ref. volt. : 90 °
+Forward section +/- : 90 °
+Polarization with : zero sequence 
+[VI 3ph.MIHD (RNisol).MIHD (RNIsol).General]
+Mode : off 
+Operate & flt.rec. blocked : no 
+Directional mode : forward 
+Method of measurement : fundamental comp. 
+Directional comparison : no 
+Release via input signal : no 
+Blk. by meas.-volt. failure : no 
+Dynamic settings : yes 
+Blk. w. inrush curr. detect. : no 
+Threshold : 0.020 A
+Dropout ratio : 0.95 
+Dropout delay : 0.00 s
+Operate delay : 0.50 s
+[VI 3ph.MIHD (RNisol).MIHD (RNIsol).Dyn.s: AR off/n.rdy]
+Effect. by AR off/n.ready : no 
+Stage blocked : no 
+[VI 3ph.MIHD (RNisol).MIHD (RNIsol).Dyn.set: AR cycle 1]
+Effected by AR cycle 1 : yes 
+Stage blocked : no 
+Threshold : 0.020 A
+Operate delay : 0.00 s
+[VI 3ph.MIHD (RNisol).MIHD (RNIsol).Dyn.set: AR cycle 2]
+Effected by AR cycle 2 : no 
+Stage blocked : yes 
+Threshold : 0.020 A
+Operate delay : 0.50 s
+[VI 3ph.MIHD (RNisol).MIHD (RNIsol).Dyn.set: AR cycle 3]
+Effected by AR cycle 3 : no 
+Stage blocked : yes 
+Threshold : 0.020 A
+Operate delay : 0.50 s
+[VI 3ph.MIHD (RNisol).MIHD (RNIsol).Dyn.s: AR cycle&gt;3]
+Effected by AR cycle gr. 3 : no 
+Stage blocked : yes 
+Threshold : 0.020 A
+Operate delay : 0.50 s
+[VI 3ph.MIHD (RNisol).MIHD (RNIsol).Dyn.set: bin.input]
+Effected by binary input : yes 
+Stage blocked : no 
+Threshold : 0.020 A
+Operate delay : 0.02 s
+[VI 3ph.Inrush detect.]
+Mode : on 
+Operat.-range limit Imax : 11.667 A
+Blocking with CWA : yes 
+Blocking with 2. harmonic : yes 
+2nd harmonic content : 15 %
+Cross-blocking : yes 
+Cross-blocking time : 0.06 s
+Start flt.rec : yes 

@@ -62,4 +62,3 @@ build/
 /output
 /node_modules
 .DS_Store
-assets/input/
