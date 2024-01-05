@@ -1,4 +1,4 @@
-package com.tarigma.ipssettings.parser.ge.container.parameter;
+package com.tarigma.ipssettings.parser.siemens.container.parameter;
 
 import com.tarigma.ipssettings.model.parameter.Parameter;
 import com.tarigma.ipssettings.model.parameter.ParameterDataType;
@@ -6,7 +6,7 @@ import com.tarigma.ipssettings.model.parameter.Unit;
 import com.tarigma.ipssettings.parser.container.parameter.ParameterParser;
 import java.util.regex.Pattern;
 
-public class GEParameterParser implements ParameterParser<Parameter<ParameterDataType>> {
+public class SiemensParameterParser implements ParameterParser<Parameter<ParameterDataType>> {
 
   /**
    * A pattern to match the key colon split pattern
@@ -36,7 +36,7 @@ public class GEParameterParser implements ParameterParser<Parameter<ParameterDat
     }
 
     // first part (<Key>)
-    String key = s.substring(0, KVColonIndex);
+    String key = s.substring(0, KVColonIndex).trim();
 
     // second part (<Value> <Unit>)
     String valueWithUnits;
@@ -49,22 +49,30 @@ public class GEParameterParser implements ParameterParser<Parameter<ParameterDat
       valueWithUnits = "";
     }
 
+    // if there's a comma, it could be an 'array' with no units
+    boolean isCommaArray = valueWithUnits.contains(",");
+
     // remove units from the string that contains the value and units
     String value;
     String units;
 
     // remove units from the string that contains the value and units by checking if it contains a space.
     // If so, that means the units are separated by a space
-    String[] parts = valueWithUnits.split(" ");
-
-    if (valueWithUnits.contains(" ") && !matchesRatioType && parts.length == 2 &&
-        parts[1].length() <= 7) {
-      value = parts[0];
-      units = parts[1];
-    } else {
-      // no space (no units), so that means we can just set the value with no units
+    if (isCommaArray) {
       value = valueWithUnits;
       units = null;
+    } else {
+      String[] parts = valueWithUnits.split(" ");
+
+      if (valueWithUnits.contains(" ") && !matchesRatioType && parts.length == 2 &&
+          parts[1].length() <= 7) {
+        value = parts[0];
+        units = parts[1];
+      } else {
+        // no space (no units), so that means we can just set the value with no units
+        value = valueWithUnits;
+        units = null;
+      }
     }
 
     // determine data type of the value
@@ -82,13 +90,7 @@ public class GEParameterParser implements ParameterParser<Parameter<ParameterDat
       parameter.setUnit(new Unit(units));
     }
 
-    // // create localization
-    // Localization localization = new Localization()
-    //         .setEnuLang3Description(key)
-    //         .setEnuLang3Name(key);
-
     return parameter.setDescription(key) // set the description to the key
-//                .setLocalization(localization)
         .setName(key); // set the name to tge key
   }
 

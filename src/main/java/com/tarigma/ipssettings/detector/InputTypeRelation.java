@@ -9,26 +9,28 @@ package com.tarigma.ipssettings.detector;
  */
 public enum InputTypeRelation {
 
-    SEL("[INFO]"),
-    GE("Serial Number:");
+  SEL("[INFO]"),
+  GE("Serial Number:"),
 
-    private String startLineRelation;
+  SIEMENS("[General.Device]");
 
-    /**
-     * Construct input type relation
-     *
-     * @param startLineRelation start line relation
-     */
-    InputTypeRelation(String startLineRelation) {
-        this.startLineRelation = startLineRelation;
-    }
+  private final String startLineRelation;
 
-    /**
-     * Return the start line relation
-     *
-     * @return start line relation
-     */
-    public String getStartLineRelation() {
-        return this.startLineRelation;
-    }
+  /**
+   * Construct input type relation
+   *
+   * @param startLineRelation start line relation
+   */
+  InputTypeRelation(String startLineRelation) {
+    this.startLineRelation = startLineRelation;
+  }
+
+  /**
+   * Return the start line relation
+   *
+   * @return start line relation
+   */
+  public String getStartLineRelation() {
+    return this.startLineRelation;
+  }
 }

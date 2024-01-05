@@ -6,45 +6,45 @@ import com.tarigma.ipssettings.model.parameter.Unit;
 
 public class LocalizationUnit extends Unit {
 
-    /**
-     * Represents attribute `Lang3`
-     */
-    @JacksonXmlProperty(isAttribute = true, localName = "Lang3")
-    private String lang3;
+  /**
+   * Represents attribute `Lang3`
+   */
+  @JacksonXmlProperty(isAttribute = true, localName = "Lang3")
+  private String lang3;
 
-    /**
-     * Represents the value of the name element / node
-     */
-    @JacksonXmlText
-    private String value;
+  /**
+   * Represents the value of the name element / node
+   */
+  @JacksonXmlText
+  private String value;
 
-    /**
-     * Construct localization unit
-     *
-     * @param lang3 lang3
-     * @param value value
-     */
-    public LocalizationUnit(String lang3, String value) {
-        super(value);
-        this.lang3 = lang3;
-        this.value = value;
-    }
+  /**
+   * Construct localization unit
+   *
+   * @param lang3 lang3
+   * @param value value
+   */
+  public LocalizationUnit(String lang3, String value) {
+    super(value);
+    this.lang3 = lang3;
+    this.value = value;
+  }
 
-    public String getLang3() {
-        return lang3;
-    }
+  public String getLang3() {
+    return lang3;
+  }
 
-    public LocalizationUnit setLang3(String lang3) {
-        this.lang3 = lang3;
-        return this;
-    }
+  public LocalizationUnit setLang3(String lang3) {
+    this.lang3 = lang3;
+    return this;
+  }
 
-    public String getValue() {
-        return value;
-    }
+  public String getValue() {
+    return value;
+  }
 
-    public LocalizationUnit setValue(String value) {
-        this.value = value;
-        return this;
-    }
+  public LocalizationUnit setValue(String value) {
+    this.value = value;
+    return this;
+  }
 }

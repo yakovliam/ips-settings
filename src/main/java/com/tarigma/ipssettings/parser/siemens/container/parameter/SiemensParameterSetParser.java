@@ -1,4 +1,4 @@
-package com.tarigma.ipssettings.parser.ge.container.parameter;
+package com.tarigma.ipssettings.parser.siemens.container.parameter;
 
 import com.tarigma.ipssettings.model.Block;
 import com.tarigma.ipssettings.model.parameter.Parameter;
@@ -8,13 +8,13 @@ import com.tarigma.ipssettings.parser.container.parameter.ParameterSetParser;
 import java.util.List;
 import java.util.Map;
 
-public class GEParameterSetParser implements ParameterSetParser {
+public class SiemensParameterSetParser implements ParameterSetParser {
 
   @Override
   public ParameterSet parse(Map<String, List<String>> parameterLinesByBlockPath,
                             Map<String, Block> blocksByPath) {
     // parameter parser is stateless and reusable
-    var paramParser = new GEParameterParser();
+    var paramParser = new SiemensParameterParser();
 
     ParameterSet parameterSet = new ParameterSet();
 

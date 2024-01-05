@@ -1,265 +1,265 @@
 package com.tarigma.ipssettings.model;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Collection;
-import java.util.UUID;
-
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.tarigma.ipssettings.model.parameter.ParameterSet;
 import com.tarigma.ipssettings.model.relay.RelayInfo;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Collection;
+import java.util.UUID;
 
 @JacksonXmlRootElement(localName = "RSEI")
 public class RSEIContainer {
 
-    private static final String DATE_TIME_FORMAT = "dd.MM.yyyy HH:mm:ss";
+  private static final String DATE_TIME_FORMAT = "dd.MM.yyyy HH:mm:ss";
 
-    /**
-     * Represents `Comment`
-     */
-    @JacksonXmlProperty(localName = "Comment")
-    private String comment;
+  /**
+   * Represents `Comment`
+   */
+  @JacksonXmlProperty(localName = "Comment")
+  private String comment;
 
-    /**
-     * Represents `VersionRSEI`
-     */
-    @JacksonXmlProperty(localName = "VersionRSEI")
-    private String versionRSEI;
+  /**
+   * Represents `VersionRSEI`
+   */
+  @JacksonXmlProperty(localName = "VersionRSEI")
+  private String versionRSEI;
 
-    /**
-     * Represents `SoftwareSource`
-     */
-    @JacksonXmlProperty(localName = "SoftwareSource")
-    private String softwareSource;
+  /**
+   * Represents `SoftwareSource`
+   */
+  @JacksonXmlProperty(localName = "SoftwareSource")
+  private String softwareSource;
 
-    /**
-     * Represents `MachineName`
-     */
-    @JacksonXmlProperty(localName = "MachineName")
-    private String machineName;
+  /**
+   * Represents `MachineName`
+   */
+  @JacksonXmlProperty(localName = "MachineName")
+  private String machineName;
 
-    /**
-     * Represents `UserDomainName`
-     */
-    @JacksonXmlProperty(localName = "UserDomainName")
-    private String userDomainName;
+  /**
+   * Represents `UserDomainName`
+   */
+  @JacksonXmlProperty(localName = "UserDomainName")
+  private String userDomainName;
 
-    /**
-     * Represents `UserName`
-     */
-    @JacksonXmlProperty(localName = "UserName")
-    private String userName;
+  /**
+   * Represents `UserName`
+   */
+  @JacksonXmlProperty(localName = "UserName")
+  private String userName;
 
-    /**
-     * Represents `DataSource`
-     */
-    @JacksonXmlProperty(localName = "DataSource")
-    private String dataSource;
+  /**
+   * Represents `DataSource`
+   */
+  @JacksonXmlProperty(localName = "DataSource")
+  private String dataSource;
 
-    /**
-     * Represents `Database`
-     */
-    @JacksonXmlProperty(localName = "Database")
-    private String database;
+  /**
+   * Represents `Database`
+   */
+  @JacksonXmlProperty(localName = "Database")
+  private String database;
 
-    /**
-     * Represents `SqlServerVersion`
-     */
-    @JacksonXmlProperty(localName = "SqlServerVersion")
-    private String sqlServerVersion;
+  /**
+   * Represents `SqlServerVersion`
+   */
+  @JacksonXmlProperty(localName = "SqlServerVersion")
+  private String sqlServerVersion;
 
-    /**
-     * Represents `DateTimeFormat`
-     */
-    @JacksonXmlProperty(localName = "DateTimeFormat")
-    private String dateTimeFormat = DATE_TIME_FORMAT;
+  /**
+   * Represents `DateTimeFormat`
+   */
+  @JacksonXmlProperty(localName = "DateTimeFormat")
+  private final String dateTimeFormat = DATE_TIME_FORMAT;
 
-    /***
-     * Represents `DateTime`
-     */
-    @JacksonXmlProperty(localName = "DateTime")
-    private String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
+  /***
+   * Represents `DateTime`
+   */
+  @JacksonXmlProperty(localName = "DateTime")
+  private final String dateTime =
+      LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
 
-    /**
-     * Represents `LanguageUI`
-     */
-    @JacksonXmlProperty(localName = "LanguageUI")
-    private String languageUI;
+  /**
+   * Represents `LanguageUI`
+   */
+  @JacksonXmlProperty(localName = "LanguageUI")
+  private String languageUI;
 
-    /**
-     * Represents `FileStamp`
-     */
-    @JacksonXmlProperty(localName = "FileStamp")
-    private UUID fileStamp;
+  /**
+   * Represents `FileStamp`
+   */
+  @JacksonXmlProperty(localName = "FileStamp")
+  private UUID fileStamp;
 
-    /**
-     * Represents `RelayInfo`
-     */
-    @JacksonXmlProperty(localName = "RelayInfo")
-    private RelayInfo relayInfo;
+  /**
+   * Represents `RelayInfo`
+   */
+  @JacksonXmlProperty(localName = "RelayInfo")
+  private RelayInfo relayInfo;
 
-    /**
-     * Represents `ParameterSet`
-     */
-    @JacksonXmlProperty(localName = "ParameterSet")
-    private ParameterSet parameterSet;
-    
-    @JacksonXmlElementWrapper(localName = "Blocks")
-    @JacksonXmlProperty(localName = "Block")
-    private Collection<Block> blocks;
-    
-    private Object enums;
+  /**
+   * Represents `ParameterSet`
+   */
+  @JacksonXmlProperty(localName = "ParameterSet")
+  private ParameterSet parameterSet;
 
-    public String getComment() {
-        return comment;
-    }
+  @JacksonXmlElementWrapper(localName = "Blocks")
+  @JacksonXmlProperty(localName = "Block")
+  private Collection<Block> blocks;
 
-    public RSEIContainer setComment(String comment) {
-        this.comment = comment;
-        return this;
-    }
+  private Object enums;
 
-    public String getVersionRSEI() {
-        return versionRSEI;
-    }
+  public String getComment() {
+    return comment;
+  }
 
-    public RSEIContainer setVersionRSEI(String versionRSEI) {
-        this.versionRSEI = versionRSEI;
-        return this;
-    }
+  public RSEIContainer setComment(String comment) {
+    this.comment = comment;
+    return this;
+  }
 
-    public String getSoftwareSource() {
-        return softwareSource;
-    }
+  public String getVersionRSEI() {
+    return versionRSEI;
+  }
 
-    public RSEIContainer setSoftwareSource(String softwareSource) {
-        this.softwareSource = softwareSource;
-        return this;
-    }
+  public RSEIContainer setVersionRSEI(String versionRSEI) {
+    this.versionRSEI = versionRSEI;
+    return this;
+  }
 
-    public String getMachineName() {
-        return machineName;
-    }
+  public String getSoftwareSource() {
+    return softwareSource;
+  }
 
-    public RSEIContainer setMachineName(String machineName) {
-        this.machineName = machineName;
-        return this;
-    }
+  public RSEIContainer setSoftwareSource(String softwareSource) {
+    this.softwareSource = softwareSource;
+    return this;
+  }
 
-    public String getUserDomainName() {
-        return userDomainName;
-    }
+  public String getMachineName() {
+    return machineName;
+  }
 
-    public RSEIContainer setUserDomainName(String userDomainName) {
-        this.userDomainName = userDomainName;
-        return this;
-    }
+  public RSEIContainer setMachineName(String machineName) {
+    this.machineName = machineName;
+    return this;
+  }
 
-    public String getUserName() {
-        return userName;
-    }
+  public String getUserDomainName() {
+    return userDomainName;
+  }
 
-    public RSEIContainer setUserName(String userName) {
-        this.userName = userName;
-        return this;
-    }
+  public RSEIContainer setUserDomainName(String userDomainName) {
+    this.userDomainName = userDomainName;
+    return this;
+  }
 
-    public String getDataSource() {
-        return dataSource;
-    }
+  public String getUserName() {
+    return userName;
+  }
 
-    public RSEIContainer setDataSource(String dataSource) {
-        this.dataSource = dataSource;
-        return this;
-    }
+  public RSEIContainer setUserName(String userName) {
+    this.userName = userName;
+    return this;
+  }
 
-    public String getDatabase() {
-        return database;
-    }
+  public String getDataSource() {
+    return dataSource;
+  }
 
-    public RSEIContainer setDatabase(String database) {
-        this.database = database;
-        return this;
-    }
+  public RSEIContainer setDataSource(String dataSource) {
+    this.dataSource = dataSource;
+    return this;
+  }
 
-    public String getSqlServerVersion() {
-        return sqlServerVersion;
-    }
+  public String getDatabase() {
+    return database;
+  }
 
-    public RSEIContainer setSqlServerVersion(String sqlServerVersion) {
-        this.sqlServerVersion = sqlServerVersion;
-        return this;
-    }
+  public RSEIContainer setDatabase(String database) {
+    this.database = database;
+    return this;
+  }
 
-    public String getDateTimeFormat() {
-        return dateTimeFormat;
-    }
+  public String getSqlServerVersion() {
+    return sqlServerVersion;
+  }
+
+  public RSEIContainer setSqlServerVersion(String sqlServerVersion) {
+    this.sqlServerVersion = sqlServerVersion;
+    return this;
+  }
+
+  public String getDateTimeFormat() {
+    return dateTimeFormat;
+  }
 
 //    public RSEIContainer setDateTimeFormat(String dateTimeFormat) {
 //        this.dateTimeFormat = dateTimeFormat;
 //        return this;
 //    }
 
-    public String getDateTime() {
-        return dateTime;
-    }
+  public String getDateTime() {
+    return dateTime;
+  }
 
 //    public RSEIContainer setDateTime(String dateTime) {
 //        this.dateTime = dateTime;
 //        return this;
 //    }
 
-    public String getLanguageUI() {
-        return languageUI;
-    }
+  public String getLanguageUI() {
+    return languageUI;
+  }
 
-    public RSEIContainer setLanguageUI(String languageUI) {
-        this.languageUI = languageUI;
-        return this;
-    }
+  public RSEIContainer setLanguageUI(String languageUI) {
+    this.languageUI = languageUI;
+    return this;
+  }
 
-    public UUID getFileStamp() {
-        return fileStamp;
-    }
+  public UUID getFileStamp() {
+    return fileStamp;
+  }
 
-    public RSEIContainer setFileStamp(UUID fileStamp) {
-        this.fileStamp = fileStamp;
-        return this;
-    }
+  public RSEIContainer setFileStamp(UUID fileStamp) {
+    this.fileStamp = fileStamp;
+    return this;
+  }
 
-    public RelayInfo getRelayInfo() {
-        return relayInfo;
-    }
+  public RelayInfo getRelayInfo() {
+    return relayInfo;
+  }
 
-    public RSEIContainer setRelayInfo(RelayInfo relayInfo) {
-        this.relayInfo = relayInfo;
-        return this;
-    }
+  public RSEIContainer setRelayInfo(RelayInfo relayInfo) {
+    this.relayInfo = relayInfo;
+    return this;
+  }
 
-    public ParameterSet getParameterSet() {
-        return parameterSet;
-    }
+  public ParameterSet getParameterSet() {
+    return parameterSet;
+  }
 
-    public RSEIContainer setParameterSet(ParameterSet parameterSet) {
-        this.parameterSet = parameterSet;
-        return this;
-    }
+  public RSEIContainer setParameterSet(ParameterSet parameterSet) {
+    this.parameterSet = parameterSet;
+    return this;
+  }
 
-    public Collection<Block> getBlocks() {
-        return blocks;
-    }
+  public Collection<Block> getBlocks() {
+    return blocks;
+  }
 
-    public void setBlocks(Collection<Block> blocks) {
-        this.blocks = blocks;
-    }
+  public void setBlocks(Collection<Block> blocks) {
+    this.blocks = blocks;
+  }
 
-    public Object getEnums() {
-        return enums;
-    }
+  public Object getEnums() {
+    return enums;
+  }
 
-    public void setEnums(Object enums) {
-        this.enums = enums;
-    }
+  public void setEnums(Object enums) {
+    this.enums = enums;
+  }
 }

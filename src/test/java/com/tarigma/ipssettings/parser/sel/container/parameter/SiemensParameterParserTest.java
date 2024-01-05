@@ -10,7 +10,7 @@ import com.tarigma.ipssettings.model.parameter.ParameterDataType;
 /**
  * Tests for SELParameterParser
  */
-class SELParameterParserTest {
+class SiemensParameterParserTest {
     
     private SELParameterParser parser = new SELParameterParser(); 
 

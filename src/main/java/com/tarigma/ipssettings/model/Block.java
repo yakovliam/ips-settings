@@ -1,50 +1,49 @@
 package com.tarigma.ipssettings.model;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-
 import java.util.UUID;
 
 public class Block {
 
-    private final UUID blockID;
+  private final UUID blockID;
 
-    private final Block parent;
+  private final Block parent;
 
-    private final String name;
-    
-    private final String description;
+  private final String name;
 
-    public Block(String name, String description, Block parent) {
-        this.name = name;
-        this.description = description;
-        this.parent = parent;
-        this.blockID = UUID.nameUUIDFromBytes(getBlockPath().getBytes());
-    }
+  private final String description;
 
-    @JacksonXmlProperty(isAttribute = true)
-    public UUID getBlockID() {
-        return blockID;
-    }
+  public Block(String name, String description, Block parent) {
+    this.name = name;
+    this.description = description;
+    this.parent = parent;
+    this.blockID = UUID.nameUUIDFromBytes(getBlockPath().getBytes());
+  }
 
-    public UUID getParentBlockID() {
-        return parent == null ? null : parent.getBlockID();
-    }
+  @JacksonXmlProperty(isAttribute = true)
+  public UUID getBlockID() {
+    return blockID;
+  }
 
-    public String getBlockPath() {
-        String suffix = name + "/";
-        return parent == null ? suffix : parent.getBlockPath() + suffix;
-    }
+  public UUID getParentBlockID() {
+    return parent == null ? null : parent.getBlockID();
+  }
 
-    public String getBlockPathFromID() {
-        String suffix = getBlockID().toString() + "/";
-        return parent == null ? suffix : parent.getBlockPathFromID() + suffix;
-    }
+  public String getBlockPath() {
+    String suffix = name + "/";
+    return parent == null ? suffix : parent.getBlockPath() + suffix;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getBlockPathFromID() {
+    String suffix = getBlockID().toString() + "/";
+    return parent == null ? suffix : parent.getBlockPathFromID() + suffix;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public String getName() {
+    return name;
+  }
+
+  public String getDescription() {
+    return description;
+  }
 }

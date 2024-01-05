@@ -2,59 +2,59 @@ package com.tarigma.ipssettings.model.parameter;
 
 public enum ParameterDataType {
 
-    DOUBLE("Double", "D", "Float", "F"),
-    STRING("String", "S"),
-    ENUM("Enum");
+  DOUBLE("Double", "D", "Float", "F"),
+  STRING("String", "S"),
+  ENUM("Enum");
 
-    /**
-     * The handle or human readable name
-     * <p>
-     * The first element in the array is the commonly accepted or 'Main' handle
-     */
-    private final String[] handle;
+  /**
+   * The handle or human readable name
+   * <p>
+   * The first element in the array is the commonly accepted or 'Main' handle
+   */
+  private final String[] handle;
 
-    /**
-     * Construct data type
-     *
-     * @param handle handle
-     */
-    ParameterDataType(String... handle) {
-        this.handle = handle;
+  /**
+   * Construct data type
+   *
+   * @param handle handle
+   */
+  ParameterDataType(String... handle) {
+    this.handle = handle;
+  }
+
+  /**
+   * Determines the parameter data type of the given value
+   *
+   * @param value value
+   * @return data type
+   */
+  public static ParameterDataType determineDataTypeByValue(String value) {
+    try {
+      Double.parseDouble(value);
+      return ParameterDataType.DOUBLE;
+    } catch (NumberFormatException ignored) {
     }
 
-    /**
-     * Returns the handle
-     *
-     * @return handle
-     */
-    public String[] getHandle() {
-        return handle;
+    try {
+      Integer.parseInt(value);
+      return ParameterDataType.DOUBLE;
+    } catch (NumberFormatException ignored) {
     }
 
-    @Override
-    public String toString() {
-        return getHandle()[0];
-    }
+    return ParameterDataType.STRING;
+  }
 
-    /**
-     * Determines the parameter data type of the given value
-     *
-     * @param value value
-     * @return data type
-     */
-    public static ParameterDataType determineDataTypeByValue(String value) {
-        try {
-            Double.parseDouble(value);
-            return ParameterDataType.DOUBLE;
-        } catch (NumberFormatException ignored) {
-        }
+  /**
+   * Returns the handle
+   *
+   * @return handle
+   */
+  public String[] getHandle() {
+    return handle;
+  }
 
-        try {
-            Integer.parseInt(value);
-            return ParameterDataType.DOUBLE;
-        } catch (NumberFormatException ignored) {
-        }
-
-        return ParameterDataType.STRING;
-    }
+  @Override
+  public String toString() {
+    return getHandle()[0];
+  }
 }

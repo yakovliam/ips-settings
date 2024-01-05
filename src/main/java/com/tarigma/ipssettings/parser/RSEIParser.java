@@ -1,7 +1,6 @@
 package com.tarigma.ipssettings.parser;
 
 import com.tarigma.ipssettings.model.RSEIContainer;
-
 import java.util.List;
 
 /**

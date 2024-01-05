@@ -1,9 +1,9 @@
-package com.tarigma.ipssettings.parser.sel.container.parameter.range;
+package com.tarigma.ipssettings.parser.siemens.container.parameter.range;
 
 import com.tarigma.ipssettings.model.parameter.range.Range;
 import com.tarigma.ipssettings.parser.container.parameter.range.RangeParser;
 
-public class SELRangeParser implements RangeParser {
+public class SiemensRangeParser implements RangeParser {
 
   /**
    * Parses into a V given a K
@@ -19,8 +19,6 @@ public class SELRangeParser implements RangeParser {
     String minValue = data[0];
     String maxValue = data[1];
 
-    return new Range()
-        .setMaxValue(maxValue)
-        .setMinValue(minValue);
+    return new Range().setMaxValue(maxValue).setMinValue(minValue);
   }
 }
