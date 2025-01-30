@@ -7,7 +7,7 @@ public enum ParameterDataType {
   ENUM("Enum");
 
   /**
-   * The handle or human readable name
+   * The handle or human-readable name
    * <p>
    * The first element in the array is the commonly accepted or 'Main' handle
    */

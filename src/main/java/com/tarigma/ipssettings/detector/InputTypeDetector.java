@@ -1,6 +1,7 @@
 package com.tarigma.ipssettings.detector;
 
 import java.util.List;
+import java.util.Optional;
 
 public class InputTypeDetector {
 
@@ -19,7 +20,13 @@ public class InputTypeDetector {
     InputTypeRelation[] relations = InputTypeRelation.values();
 
     for (InputTypeRelation relation : relations) {
-      if (firstLine.startsWith(relation.getStartLineRelation())) {
+      Optional<List<String>> relationLines = relation.getStartLineRelations();
+      if(relationLines.isEmpty()) {
+        return null;
+      }
+
+      List<String> actualRelations = relationLines.get();
+      if (actualRelations.stream().anyMatch(firstLine::startsWith)) {
         return relation;
       }
     }

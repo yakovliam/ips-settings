@@ -1,5 +1,9 @@
 package com.tarigma.ipssettings.detector;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
 /**
  * This is an enumeration of strings
  * <p>
@@ -9,20 +13,18 @@ package com.tarigma.ipssettings.detector;
  */
 public enum InputTypeRelation {
 
-  SEL("[INFO]"),
-  GE("Serial Number:"),
+  SEL(Collections.singletonList("[INFO]")), GE(List.of("Serial Number:", "Product Version:")),
+  SIEMENS(Collections.singletonList("[General.Device]")), ABB(null);
 
-  SIEMENS("[General.Device]");
-
-  private final String startLineRelation;
+  private final List<String> startLineRelations;
 
   /**
    * Construct input type relation
    *
-   * @param startLineRelation start line relation
+   * @param startLineRelations start line relations
    */
-  InputTypeRelation(String startLineRelation) {
-    this.startLineRelation = startLineRelation;
+  InputTypeRelation(List<String> startLineRelations) {
+    this.startLineRelations = startLineRelations;
   }
 
   /**
@@ -30,7 +32,7 @@ public enum InputTypeRelation {
    *
    * @return start line relation
    */
-  public String getStartLineRelation() {
-    return this.startLineRelation;
+  public Optional<List<String>> getStartLineRelations() {
+    return Optional.ofNullable(this.startLineRelations);
   }
 }

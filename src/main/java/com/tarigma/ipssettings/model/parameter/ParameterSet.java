@@ -8,6 +8,8 @@ import java.util.UUID;
 
 public class ParameterSet {
 
+  private static final String DEFAULT_NAME = "Parameter Set";
+
   /**
    * Represents `ParamSetID`
    */
@@ -33,6 +35,8 @@ public class ParameterSet {
    * Construct parameter set
    */
   public ParameterSet() {
+    this.id = UUID.randomUUID();
+    this.name = DEFAULT_NAME;
     this.parameterSet = new ArrayList<>();
   }
 

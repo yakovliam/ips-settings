@@ -1,12 +1,12 @@
-package com.tarigma.ipssettings.parser.siemens;
+package com.tarigma.ipssettings.parser.abb;
 
 import com.tarigma.ipssettings.model.Block;
 import com.tarigma.ipssettings.model.RSEIContainer;
 import com.tarigma.ipssettings.model.parameter.ParameterSet;
 import com.tarigma.ipssettings.parser.RSEIParser;
-import com.tarigma.ipssettings.parser.siemens.container.SiemensBlocksParser;
-import com.tarigma.ipssettings.parser.siemens.container.SiemensHeaderParser;
-import com.tarigma.ipssettings.parser.siemens.container.parameter.SiemensParameterSetParser;
+import com.tarigma.ipssettings.parser.abb.container.ABBBlocksParser;
+import com.tarigma.ipssettings.parser.abb.container.ABBHeaderParser;
+import com.tarigma.ipssettings.parser.abb.container.parameter.ABBParameterSetParser;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -20,9 +20,10 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SiemensParser implements RSEIParser {
+public class ABBParser implements RSEIParser {
 
-  private static final Logger LOG = LoggerFactory.getLogger(SiemensParser.class);
+  private static final Logger LOG =
+      LoggerFactory.getLogger(com.tarigma.ipssettings.parser.ge.GEParser.class);
 
   private static final Pattern BLOCK_HEADER = Pattern.compile("\\[(.*)\\]");
 
@@ -39,16 +40,19 @@ public class SiemensParser implements RSEIParser {
         currentBlockName = m.group(1).trim();
         linesByBlockName.put(currentBlockName, new ArrayList<>());
       } else {
-        linesByBlockName.get(currentBlockName).add(currentLine);
+        linesByBlockName.get(currentBlockName).add(currentLine.strip());
       }
     }
 
+    // remove lines that are empty
+    linesByBlockName.values().forEach(linesList -> linesList.removeIf(String::isEmpty));
+
     // parse info
-    RSEIContainer rseiContainer = new SiemensHeaderParser().parse(Collections.emptyList());
+    RSEIContainer rseiContainer = new ABBHeaderParser().parse(Collections.emptyList());
 
     List<String> blockNames = new ArrayList<>(linesByBlockName.keySet());
     // parse blocks
-    Collection<Block> blocks = new SiemensBlocksParser(blockNames).parse(lines);
+    Collection<Block> blocks = new ABBBlocksParser(blockNames).parse(lines);
     rseiContainer.setBlocks(blocks);
 
     // map blocks by name for quick lookup
@@ -59,7 +63,7 @@ public class SiemensParser implements RSEIParser {
 
     // parse parameters
     ParameterSet parameterSet =
-        new SiemensParameterSetParser().parse(parameterLinesByBlockPath, blocksByPath);
+        new ABBParameterSetParser().parse(parameterLinesByBlockPath, blocksByPath);
     rseiContainer.setParameterSet(parameterSet);
 
     return rseiContainer;
@@ -90,12 +94,12 @@ public class SiemensParser implements RSEIParser {
           result.put(currentBlockPath, new ArrayList<>());
         }
       } else {
-        currentBlockLines.add(currentLine);
+        if (!currentLine.isEmpty()) {
+          currentBlockLines.add(currentLine.strip());
+        }
       }
     }
 
     return result;
   }
 }
-
-

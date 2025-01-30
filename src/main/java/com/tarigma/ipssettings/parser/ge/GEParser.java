@@ -19,9 +19,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-/**
- * Parses SEL format input (comma separated) into the RSEI class structure
- */
 public class GEParser implements RSEIParser {
 
   private static final Logger LOG = LoggerFactory.getLogger(GEParser.class);
@@ -46,8 +43,8 @@ public class GEParser implements RSEIParser {
     rseiContainer.setBlocks(blocks);
 
     // map blocks by name for quick lookup
-    Map<String, Block> blocksByPath = blocks.stream()
-        .collect(Collectors.toMap(Block::getBlockPath, Function.identity()));
+    Map<String, Block> blocksByPath =
+        blocks.stream().collect(Collectors.toMap(Block::getBlockPath, Function.identity()));
 
     Map<String, List<String>> parameterLinesByBlockPath = splitBlocksFromParameters(parsableData);
 

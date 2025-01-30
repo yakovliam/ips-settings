@@ -1,17 +1,23 @@
 package com.tarigma.ipssettings;
 
+import com.beust.jcommander.JCommander;
 import com.tarigma.ipssettings.detector.InputTypeDetector;
 import com.tarigma.ipssettings.detector.InputTypeRelation;
 import com.tarigma.ipssettings.model.RSEIContainer;
 import com.tarigma.ipssettings.parser.RSEIParser;
+import com.tarigma.ipssettings.parser.abb.ABBParser;
 import com.tarigma.ipssettings.parser.ge.GEParser;
 import com.tarigma.ipssettings.parser.sel.SELParser;
 import com.tarigma.ipssettings.parser.siemens.SiemensParser;
 import com.tarigma.ipssettings.writer.csv.RSEIContainerCSVWriter;
 import com.tarigma.ipssettings.writer.xml.RSEIContainerXMLWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,29 +46,63 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ApplicationR
    */
   @Override
   public void onApplicationEvent(ApplicationReadyEvent event) {
+    IpsSettingsArgs jct = new IpsSettingsArgs();
+    String[] argv = event.getArgs();
 
-    // attempt conversion for each file in input directory
+    if (List.of(argv).isEmpty()) {
+      // attempt conversion for each file in input directory
+      try {
+        Files.walk(inputDir).filter(Files::isRegularFile)
+            .filter(path -> path.toString().endsWith(inputFilenameSuffix)).forEach(this::convert);
+
+      } catch (Exception e) {
+        LOG.error("failed to walk input directory", e);
+      }
+    }
+
+    new JCommander(jct).parse(argv);
+
     try {
-      Files.walk(inputDir).filter(Files::isRegularFile)
-          .filter(path -> path.toString().endsWith(inputFilenameSuffix)).forEach(this::convert);
+      Set<Path> files = Files.walk(inputDir).filter(Files::isRegularFile)
+          .filter(path -> path.toString().endsWith(inputFilenameSuffix)).peek(System.out::println)
+          .peek(p -> {
+            System.out.println("p.getFileName() = " + p.getFileName());
+          }).filter(file -> file.getFileName().toString().equals(jct.file()))
+          .peek(System.out::println).collect(Collectors.toSet());
 
-    } catch (Exception e) {
-      LOG.error("failed to walk input directory", e);
+      LOG.info("Found {} targeted files to convert.", files.size());
+      files.forEach(p -> convertWithInputTypeRelation(p, jct.man()));
+
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
   }
 
   private void convert(Path input) {
+    List<String> inputData = null;
+    try {
+      inputData = Files.readAllLines(input);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+
+    // detect type
+    InputTypeRelation inputTypeRelation = InputTypeDetector.findInputType(inputData);
+
+    if (inputTypeRelation == null) {
+      LOG.error("failed to detect input type for file: {}", input);
+    }
+  }
+
+  private void convertWithInputTypeRelation(Path input, InputTypeRelation inputTypeRelation) {
     LOG.info("converting input file: {}", input.getFileName());
     try {
       List<String> inputData = Files.readAllLines(input);
 
-      // detect type
-      InputTypeRelation inputTypeRelation = InputTypeDetector.findInputType(inputData);
-
       // get corresponding parser
       RSEIParser parser;
 
-      switch (inputTypeRelation) {
+      switch (Objects.requireNonNull(inputTypeRelation)) {
         case GE:
           parser = new GEParser();
           break;
@@ -71,6 +111,9 @@ public class IpsSettingsBootstrapper implements ApplicationListener<ApplicationR
           break;
         case SIEMENS:
           parser = new SiemensParser();
+          break;
+        case ABB:
+          parser = new ABBParser();
           break;
         default:
           throw new IllegalStateException("Unexpected value: " + inputTypeRelation);
